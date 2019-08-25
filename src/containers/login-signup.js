@@ -30,7 +30,7 @@ class LoginSignUp extends React.Component{
                 </Form.Field>
                 <Form.Field>
                 </Form.Field>
-                <Button type='submit'>Submit</Button>
+                <Link to="/userprofile"><Button type='submit'>Submit</Button></Link>
             </Form>
         </Grid.Column>
 
@@ -47,7 +47,7 @@ class LoginSignUp extends React.Component{
                 </Form.Field>
                 <Form.Field>
                 </Form.Field>
-                <Button type='submit'>Submit</Button>
+                <Link to="/userprofile"><Button type='submit'>Submit</Button></Link>
             </Form>
         </Grid.Column>
       </Grid.Row>
