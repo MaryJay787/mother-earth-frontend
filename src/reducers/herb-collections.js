@@ -2,7 +2,8 @@ const initialState = {
     herbs: [],
     remedies: [],
     userHerbs: [],
-    userRemedies: []
+    userRemedies: [],
+    loggedInStatus: false
   };
   
   export default (state = initialState, action) => {
@@ -12,6 +13,12 @@ const initialState = {
       }
       case 'GET_REMEDIES': {
         return { ...state, remedies: action.data }
+      }
+      case 'LOGIN': {
+        return { ...state, loggedInStatus: true}
+      }
+      case 'LOGOUT': {
+        return { ...state, loggedInStatus: false}
       }
       default: {
         return state;
