@@ -14,7 +14,7 @@ class App extends React.Component {
     const id = ls.get('id')
     console.log(id)
     const jwt = ls.get('jwt')
-    fetch(`http://localhost:3000/users/${id}/herbs`, {
+    fetch(`http://localhost:3000/user_herbs/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${jwt}`

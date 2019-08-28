@@ -4,6 +4,16 @@ import { Link } from 'react-router-dom';
 import {connect } from 'react-redux';
 import ls from 'local-storage';
 
+const user_herbs = `http://localhost:3000/user_herbs/:user_id`
+const add_herb = `http://localhost:3000/add_herb/:user_id/:herb_id`
+const remove_herb = `http://localhost:3000/remove_herb/:user_id/:herb_id`
+
+const user_remedies = `http://localhost:3000/user_remedies/:user_id`
+const add_remedy = `http://localhost:3000/add_remedy/:user_id/:remedy_id`
+const remove_remedy = `http://localhost:3000/remove_remedy/:user_id/:remedy_id`
+
+
+
 class UserProfile extends React.Component {
     state = { activeItem: 'bio' }
 
