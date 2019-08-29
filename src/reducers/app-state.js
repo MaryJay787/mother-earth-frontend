@@ -11,7 +11,7 @@ const initialState = {
   export default (state = initialState, action) => {
     switch (action.type) {
       case 'GET_HERBS': {
-        return { ...state, herbs: action.data }
+        return { ...state, herbs: action.herbs }
       }
       case 'GET_REMEDIES': {
         return { ...state, remedies: action.data }

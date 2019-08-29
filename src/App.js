@@ -5,23 +5,19 @@ import HomePage from './containers/homepage';
 import LoginSignUp from './containers/login-signup';
 import UserProfile from './containers/user-profile';
 import Herbs from './containers/herbs-collection';
-import ls from 'local-storage';
+// import ls from 'local-storage';
+import { getHerbs } from './fetches/backend';
+import { connect } from 'react-redux';
 // import Remedies from './containers/remedies-collection';
 
 
 class App extends React.Component {
   componentDidMount(){
-    const id = ls.get('id')
-    console.log(id)
-    const jwt = ls.get('jwt')
-    fetch(`http://localhost:3000/user_herbs/${id}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${jwt}`
-            }
-        })
-        .then(res => res.json())
-        .then(console.log)
+    // const id = ls.get('id')
+    // console.log(id)
+    // const jwt = ls.get('jwt')
+    getHerbs().then(herbs => this.props.dispatch({ type: 'GET_HERBS', herbs }))
+    
   }
   render(){
     return(
@@ -39,4 +35,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect()(App);

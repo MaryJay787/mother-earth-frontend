@@ -23,8 +23,8 @@ class UserProfile extends React.Component {
         const jwt = ls.get('jwt')
         console.log(jwt)
         getUser(jwt).then(data => this.props.dispatch({ type: 'SAVE_USER', user: data.user}))
-        getHerbs()
-        
+        // getHerbs(jwt).then(herbs => this.props.dispatch({ type: 'GET_HERBS', herbs }))
+
     }
     
     handleLogout = (e) => {
