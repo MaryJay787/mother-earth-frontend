@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import HerbCard from '../components/herb-card';
 // import RemedyCard from '../components/remedy-card';
-// import PlantCard from '../components/plant-card';
+import PlantCard from '../components/plant-card';
 import { Grid, Segment, Divider, Header, Input, Menu} from 'semantic-ui-react';
 // import ls from 'local-storage';
 // import { getHerbs } from '../fetches/backend';
@@ -21,8 +21,8 @@ class Herbs extends React.Component{
             return this.props.herbs.map(herb => <HerbCard key={herb.id} {...herb}/>);
         // case 'remedies':
         //     return this.props.remedies.map(rem => <RemedyCard key={rem.id} {...rem}/>);
-        // case 'home':
-        //     return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
+        case 'home':
+            return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
         default:
             return null;
         }
@@ -69,7 +69,7 @@ class Herbs extends React.Component{
                 <Segment>
                 <Grid>
                     {console.log(this.props.herbs)}
-                    {this.state.activeItem === 'herbs' ? this.herbsSwitch() : null}
+                    {this.state.activeItem === 'home' ? this.herbsSwitch() : null}
                 </Grid>
                 </Segment>
             </div>
@@ -77,6 +77,6 @@ class Herbs extends React.Component{
     }
 }
 
-const mapStateToProps = state => ({herbs: state.herbs.herbs.allherbs})
+const mapStateToProps = state => ({herbs: state.herbs.herbs.allherbs, plants: state.herbs.plants.allplants})
 
 export default connect(mapStateToProps)(Herbs);

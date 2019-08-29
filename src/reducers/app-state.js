@@ -1,6 +1,7 @@
 const initialState = {
     herbs: [],
     remedies: [],
+    plants: [],
     userHerbs: [],
     userRemedies: [],
     loggedInStatus: false,
@@ -27,6 +28,9 @@ const initialState = {
       }
       case 'CHANGE_ACTIVE': {
         return {...state, activeItem: action.name}
+      }
+      case 'GET_PLANTS': {
+        return { ...state, plants: action.plants }
       }
       default: {
         return state;

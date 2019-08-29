@@ -6,7 +6,7 @@ import LoginSignUp from './containers/login-signup';
 import UserProfile from './containers/user-profile';
 import Herbs from './containers/herbs-collection';
 // import ls from 'local-storage';
-import { getHerbs } from './fetches/backend';
+import { getHerbs, getPlants } from './fetches/backend';
 import { connect } from 'react-redux';
 // import Remedies from './containers/remedies-collection';
 
@@ -17,6 +17,7 @@ class App extends React.Component {
     // console.log(id)
     // const jwt = ls.get('jwt')
     getHerbs().then(herbs => this.props.dispatch({ type: 'GET_HERBS', herbs }))
+    getPlants().then(plants => this.props.dispatch({ type: 'GET_PLANTS', plants }))
     
   }
   render(){
