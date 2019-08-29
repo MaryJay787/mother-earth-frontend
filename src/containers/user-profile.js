@@ -3,11 +3,11 @@ import { Grid, Menu, Segment, Header, Image, List, Divider, Container } from 'se
 import { Link } from 'react-router-dom';
 import {connect } from 'react-redux';
 import ls from 'local-storage';
+import { getUser, getHerbs } from '../fetches/backend';
 
 const user_herbs = `http://localhost:3000/user_herbs/:user_id`
 const add_herb = `http://localhost:3000/add_herb/:user_id/:herb_id`
 const remove_herb = `http://localhost:3000/remove_herb/:user_id/:herb_id`
-
 const user_remedies = `http://localhost:3000/user_remedies/:user_id`
 const add_remedy = `http://localhost:3000/add_remedy/:user_id/:remedy_id`
 const remove_remedy = `http://localhost:3000/remove_remedy/:user_id/:remedy_id`
@@ -15,28 +15,16 @@ const remove_remedy = `http://localhost:3000/remove_remedy/:user_id/:remedy_id`
 
 
 class UserProfile extends React.Component {
-    state = { activeItem: 'bio' }
+    // state = { activeItem: 'bio' }
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    handleItemClick = (e, { name }) => this.props.dispatch({type: 'CHANGE_ACTIVE', name })
     
     componentDidMount(){
         const jwt = ls.get('jwt')
         console.log(jwt)
-
-        fetch("http://localhost:3000/profile", {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${jwt}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => { ls.set('username', data.user.username) 
-                        ls.set('name', data.user.name) 
-                        ls.set('image', data.user.image) 
-                        ls.set('bio', data.user.bio) 
-                        ls.set('id', data.user.id)
-                        ls.set('specialty', data.user.specialty)
-                     })
+        getUser(jwt).then(data => this.props.dispatch({ type: 'SAVE_USER', user: data.user}))
+        getHerbs()
+        
     }
     
     handleLogout = (e) => {
@@ -46,12 +34,6 @@ class UserProfile extends React.Component {
 
 
     render() {
-        const { activeItem } = this.state
-        const username = ls.get('username')
-        const name = ls.get('name')
-        const image = ls.get('image')
-        const specialty = ls.get('specialty')
-        const bio = ls.get('bio')
         
         return (
             <div>
@@ -59,7 +41,7 @@ class UserProfile extends React.Component {
                 <Header as='h1' content='User Profile' />
                 <Link to='/'><Header size='small' content='Logout' textAlign='right' onClick={this.handleLogout} /></Link>
             </Segment>
-            <Link to='/collection'><Header size='small' content='View Mother Earth' textAlign='right'/></Link>
+            <Link to='/herb_collection'><Header size='small' content='View Mother Earth' textAlign='right'/></Link>
             <Divider/>
                 <Grid>
                     <Grid.Column stretched width={12}>
@@ -67,26 +49,26 @@ class UserProfile extends React.Component {
                     <Grid columns={2} relaxed='very'>
                 <Grid.Column>
                     <p>
-                    <Image src={image} />
+                    <Image src={this.props.user.image} />
                     </p>
                 </Grid.Column>
                 <Grid.Column>
                     <Container textAlign='center'>
                     <List>
                         <List.Item>
-                        <List.Header>Username</List.Header>{username}
+                        <List.Header>Username</List.Header>{this.props.user.username}
                         </List.Item>
                         <List.Item>
                         <List.Header>Name</List.Header>
-                        {name}
+                        {this.props.user.name}
                         </List.Item>
                         <List.Item>
                         <List.Header>Specialty</List.Header>
-                        {specialty}
+                        {this.props.user.specialty}
                         </List.Item>
                         <List.Item>
                         <List.Header>Bio</List.Header>
-                        {bio}
+                        {this.props.user.bio}
                         </List.Item>
                     </List>
                     </Container>
@@ -101,27 +83,27 @@ class UserProfile extends React.Component {
                 <Menu fluid vertical tabular='right'>
                     <Menu.Item
                     name='profile'
-                    active={activeItem === 'profile'}
+                    active={this.props.active === 'profile'}
                     onClick={this.handleItemClick}
                     />
                     <Menu.Item
                     name='my herbs'
-                    active={activeItem === 'my herbs'}
+                    active={this.props.active === 'my herbs'}
                     onClick={this.handleItemClick}
                     />
                     <Menu.Item
                     name='my remedies'
-                    active={activeItem === 'my remedies'}
+                    active={this.props.active === 'my remedies'}
                     onClick={this.handleItemClick}
                     />
                     <Menu.Item
                     name='herbal notes'
-                    active={activeItem === 'herbal notes'}
+                    active={this.props.active === 'herbal notes'}
                     onClick={this.handleItemClick}
                     />
                     <Menu.Item
                     name='remedy notes'
-                    active={activeItem === 'remedy notes'}
+                    active={this.props.active === 'remedy notes'}
                     onClick={this.handleItemClick}
                     />
                 </Menu>
@@ -133,4 +115,6 @@ class UserProfile extends React.Component {
     }
 }
 
-export default connect()(UserProfile);
+const mapStateToProps = state => ({ user: state.herbs.user, active: state.herbs.activeItem })
+
+export default connect(mapStateToProps)(UserProfile);

@@ -30,7 +30,7 @@ class App extends React.Component {
           <Route exact path='/' component={HomePage}/>
           <Route exact path='/login' render={() => (<LoginSignUp />)}  />
           <Route exact path='/userprofile' render={() => (<UserProfile />)} />
-          <Route exact path="/collection" render={() => (<Herbs />)}/>
+          <Route exact path="/herb_collection" render={() => (<Herbs />)}/>
 
           {/* <Route exact path="/cars" render={() => ( <Remedies addCar={this.addCar} user={this.state.currentUser} loginStatus={this.state.loggedInStatus} cars={this.state.cars}/>)}/> */}
         </Switch>

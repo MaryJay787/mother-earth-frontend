@@ -3,7 +3,9 @@ const initialState = {
     remedies: [],
     userHerbs: [],
     userRemedies: [],
-    loggedInStatus: false
+    loggedInStatus: false,
+    user: {},
+    activeItem: 'bio'
   };
   
   export default (state = initialState, action) => {
@@ -19,6 +21,12 @@ const initialState = {
       }
       case 'LOGOUT': {
         return { ...state, loggedInStatus: false}
+      }
+      case 'SAVE_USER': {
+        return {...state, user: action.user}
+      }
+      case 'CHANGE_ACTIVE': {
+        return {...state, activeItem: action.name}
       }
       default: {
         return state;
