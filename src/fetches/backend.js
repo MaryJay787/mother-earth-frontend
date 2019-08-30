@@ -1,19 +1,18 @@
 const PROFILE = "http://localhost:3000/profile"
 const HERBS = "http://localhost:3000/herbs"
 const PLANTS = "http://localhost:3000/plants"
+const REMS = "http://localhost:3000/remedies"
 
 export function getHerbs() {
     return fetch(HERBS).then(res => res.json())
-    // return fetch(HERBS, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Authorization': `Bearer ${jwt}`
-    //     }
-    // }).then(res => res.json())
 };
 
 export function getPlants() {
     return fetch(PLANTS).then(res => res.json())
+}
+
+export function getRemedies() {
+    return fetch(REMS).then(res => res.json())
 }
 
 // export function getUserHerbs(id, jwt){

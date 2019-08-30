@@ -4,9 +4,10 @@ import { Switch, Route} from 'react-router-dom';
 import HomePage from './containers/homepage';
 import LoginSignUp from './containers/login-signup';
 import UserProfile from './containers/user-profile';
+import EditProfile from './containers/edit-profile';
 import Herbs from './containers/herbs-collection';
 // import ls from 'local-storage';
-import { getHerbs, getPlants } from './fetches/backend';
+import { getHerbs, getPlants, getRemedies } from './fetches/backend';
 import { connect } from 'react-redux';
 // import Remedies from './containers/remedies-collection';
 
@@ -18,6 +19,8 @@ class App extends React.Component {
     // const jwt = ls.get('jwt')
     getHerbs().then(herbs => this.props.dispatch({ type: 'GET_HERBS', herbs }))
     getPlants().then(plants => this.props.dispatch({ type: 'GET_PLANTS', plants }))
+    getRemedies().then(remedies => this.props.dispatch({ type: 'GET_REMS', remedies }))
+
     
   }
   render(){
@@ -27,9 +30,9 @@ class App extends React.Component {
           <Route exact path='/' component={HomePage}/>
           <Route exact path='/login' render={() => (<LoginSignUp />)}  />
           <Route exact path='/userprofile' render={() => (<UserProfile />)} />
-          <Route exact path="/herb_collection" render={() => (<Herbs />)}/>
+          <Route exact path='/herb_collection' render={() => (<Herbs />)}/>
+          <Route exact path='/editprofile' render={() => (<EditProfile />)}/>
 
-          {/* <Route exact path="/cars" render={() => ( <Remedies addCar={this.addCar} user={this.state.currentUser} loginStatus={this.state.loggedInStatus} cars={this.state.cars}/>)}/> */}
         </Switch>
       </div>
     )

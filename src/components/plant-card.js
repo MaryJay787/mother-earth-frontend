@@ -7,7 +7,7 @@ class PlantCard extends React.Component{
             <div>
             <Card>
                 <Card.Content>
-                    <Image src={this.props.link}/>
+                    <p>{this.props.link}</p>
                     <Divider/>
                     <Card.Header textAlign='center'>{this.props.scientific_name}</Card.Header>
                     <Divider/>

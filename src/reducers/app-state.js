@@ -14,11 +14,11 @@ const initialState = {
       case 'GET_HERBS': {
         return { ...state, herbs: action.herbs }
       }
-      case 'GET_REMEDIES': {
-        return { ...state, remedies: action.data }
+      case 'GET_REMS': {
+        return { ...state, remedies: action.remedies }
       }
-      case 'LOGIN': {
-        return { ...state, loggedInStatus: true}
+      case 'GET_PLANTS': {
+        return { ...state, plants: action.plants }
       }
       case 'LOGOUT': {
         return { ...state, loggedInStatus: false}
@@ -27,10 +27,10 @@ const initialState = {
         return {...state, user: action.user}
       }
       case 'CHANGE_ACTIVE': {
-        return {...state, activeItem: action.name}
+        return {...state, activeItem: action.name }
       }
-      case 'GET_PLANTS': {
-        return { ...state, plants: action.plants }
+      case 'LOGIN': {
+        return { ...state, loggedInStatus: true}
       }
       default: {
         return state;

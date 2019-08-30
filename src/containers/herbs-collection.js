@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import HerbCard from '../components/herb-card';
-// import RemedyCard from '../components/remedy-card';
+import RemedyCard from '../components/remedy-card';
 import PlantCard from '../components/plant-card';
-import { Grid, Segment, Divider, Header, Input, Menu} from 'semantic-ui-react';
+import { Grid, Segment, Header, Divider, Input, Menu} from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
+// import userProfile from './user-profile';
 // import ls from 'local-storage';
-// import { getHerbs } from '../fetches/backend';
 
 
 class Herbs extends React.Component{
@@ -19,29 +20,27 @@ class Herbs extends React.Component{
         switch(act){
         case 'herbs':
             return this.props.herbs.map(herb => <HerbCard key={herb.id} {...herb}/>);
-        // case 'remedies':
-        //     return this.props.remedies.map(rem => <RemedyCard key={rem.id} {...rem}/>);
+        case 'remedies':
+            return this.props.remedies.map(rem => <RemedyCard key={rem.id} {...rem}/>);
         case 'home':
             return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
         default:
             return null;
         }
   }
-
-//   remediesSwitch(){
-//     return this.props.remedies.map(rem => <RemediesCard key={herb.id} {...herb}/>)
-// }
-
-// plantsSwitch(){
-//     return this.props.herbs.map(herb => <HerbCard key={herb.id} {...herb}/>)
-// }
    
     render(){
         const { activeItem } = this.state
+
         return(
             <div>
                 <Segment>
                     <Header as='h1' content='Mother Earth' textAlign='center'/>
+                    <Grid textAlign='right'>
+                    <Divider vertical hidden/>
+                    <Link to='/' ><Header size='small' content='Logout' textAlign='right'/></Link>
+                    <Link to='/userprofile' ><Header size='small' content='Back to Profile' textAlign='right'/></Link>
+                    </Grid>
                 </Segment>
                 <Menu pointing>
                     <Menu.Item
@@ -68,8 +67,8 @@ class Herbs extends React.Component{
                 
                 <Segment>
                 <Grid>
-                    {console.log(this.props.herbs)}
-                    {this.state.activeItem === 'home' ? this.herbsSwitch() : null}
+                    {console.log(this.props.remedies)}
+                    {this.herbsSwitch()}
                 </Grid>
                 </Segment>
             </div>
@@ -77,6 +76,6 @@ class Herbs extends React.Component{
     }
 }
 
-const mapStateToProps = state => ({herbs: state.herbs.herbs.allherbs, plants: state.herbs.plants.allplants})
+const mapStateToProps = state => ({herbs: state.herbs.herbs.allherbs, plants: state.herbs.plants.allplants, remedies: state.herbs.remedies.allremedies})
 
 export default connect(mapStateToProps)(Herbs);

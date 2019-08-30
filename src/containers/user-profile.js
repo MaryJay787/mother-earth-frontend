@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Menu, Segment, Header, Image, List, Divider, Container } from 'semantic-ui-react';
+import { Grid, Menu, Segment, Header, Image, List, Divider, Container, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import {connect } from 'react-redux';
 import ls from 'local-storage';
@@ -71,6 +71,7 @@ class UserProfile extends React.Component {
                         {this.props.user.bio}
                         </List.Item>
                     </List>
+                    <Link to='/editprofile'><Button content='Edit Profile'/></Link>
                     </Container>
                 </Grid.Column>
                 </Grid>
