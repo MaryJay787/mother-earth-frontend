@@ -1,6 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Header, Button, Segment, Card, Form } from 'semantic-ui-react';
 import ls from 'local-storage';
+import UserProfile from './user-profile'
 
 class EditProfile extends React.Component {
     state = {
@@ -35,6 +37,10 @@ class EditProfile extends React.Component {
         this.setState({password: e.target.value})
     }
 
+    // redirect(){
+    //     return <UserProfile />
+    // }
+
     handleSubmit = (e) => {
         e.preventDefault()
         const values = {user: {username: this.state.username, 
@@ -53,8 +59,13 @@ class EditProfile extends React.Component {
             },
             body: JSON.stringify(values)})
             .then(res => res.text())
-            .then(console.log)
-            // .then(this.props.history.push("/userprofile"))
+            .then(data => {
+                if(data){
+                    alert('Profile Updated Successfully')
+                    this.props.history.push("/userprofile")
+            }   else
+                    alert('Invalid Entries')
+            })
 
     }
 
@@ -97,4 +108,4 @@ class EditProfile extends React.Component {
     }
 }
 
-export default EditProfile;
+export default withRouter(EditProfile);

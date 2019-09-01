@@ -6,7 +6,8 @@ const initialState = {
     userRemedies: [],
     loggedInStatus: false,
     user: {},
-    activeItem: 'bio'
+    activeItem: 'bio',
+    clicked: false
   };
   
   export default (state = initialState, action) => {
@@ -31,6 +32,9 @@ const initialState = {
       }
       case 'LOGIN': {
         return { ...state, loggedInStatus: true}
+      }
+      case 'COLLECTION_CLICKED':{
+        return { ...state, clicked: true}
       }
       default: {
         return state;

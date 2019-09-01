@@ -73,6 +73,7 @@ class LoginSignUp extends React.Component{
     .then(data => {
       if(data.jwt){
         ls.set('jwt', data.jwt)
+        ls.set('id', data.user.id)
         this.props.dispatch({type: 'LOGIN'})
         this.props.history.push("/userprofile")
       } else 

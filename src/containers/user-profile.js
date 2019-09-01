@@ -1,19 +1,13 @@
 import React from 'react';
 import { Grid, Menu, Segment, Header, Image, List, Divider, Container, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+// import HerbCard from '../components/herb-card';
+import RemedyCard from '../components/remedy-card';
+import PlantCard from '../components/plant-card';
 import {connect } from 'react-redux';
 import ls from 'local-storage';
-import { getUser, getHerbs } from '../fetches/backend';
-
-const user_herbs = `http://localhost:3000/user_herbs/:user_id`
-const add_herb = `http://localhost:3000/add_herb/:user_id/:herb_id`
-const remove_herb = `http://localhost:3000/remove_herb/:user_id/:herb_id`
-const user_remedies = `http://localhost:3000/user_remedies/:user_id`
-const add_remedy = `http://localhost:3000/add_remedy/:user_id/:remedy_id`
-const remove_remedy = `http://localhost:3000/remove_remedy/:user_id/:remedy_id`
-
-
-
+import { getUser, getUserHerbs, getUserRems, getUserRemNotes, getUserHerbNotes } from '../fetches/backend';
+import {} from ''
 class UserProfile extends React.Component {
     // state = { activeItem: 'bio' }
 
@@ -21,17 +15,42 @@ class UserProfile extends React.Component {
     
     componentDidMount(){
         const jwt = ls.get('jwt')
+        const id = ls.get('id')
         console.log(jwt)
         getUser(jwt).then(data => this.props.dispatch({ type: 'SAVE_USER', user: data.user}))
-        // getHerbs(jwt).then(herbs => this.props.dispatch({ type: 'GET_HERBS', herbs }))
+        getUserHerbs(id).then(data => this.props.dispatch({type: 'GET_USER_HERBS', data}))
+        getUserRems(id).then(data => this.props.dispatch({type: 'GET_USER_REMS', data}))
+        // getUserHerbNotes(id).then(data => this.props.dispatch({type: 'GET_USER_HERB_NOTES', data}))
+        // getUserRemNotes(id).then(data => this.props.dispatch({type: 'GET_USER_REMS_NOTES', data}))
 
     }
-    
+
     handleLogout = (e) => {
         ls.remove('jwt')
         this.props.dispatch({type: 'LOGOUT'})
     }
 
+    clicked(){
+        this.props.dispatch({type: 'COLLECTION_CLICKED'})
+    }
+
+    showUserCollection(){
+        const act = this.props.active
+        switch(act){
+        case 'profile':
+            return null;
+        case 'my herbs':
+            return this.props.remedies.map(rem => <RemedyCard key={rem.id} {...rem}/>);
+        case 'my remedies':
+            return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
+        case 'herbal notes':
+            return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
+        case 'remedy notes':
+            return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
+        default:
+            return null;
+        }
+    }
 
     render() {
         
@@ -110,6 +129,11 @@ class UserProfile extends React.Component {
                 </Menu>
                 </Grid.Column>
             </Grid>
+            <Segment>
+                <Container>
+                    {this.clicked ? this.showUserCollection() : null }
+                </Container>
+            </Segment>
             </div>
 
         )
