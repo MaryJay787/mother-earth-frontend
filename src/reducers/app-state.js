@@ -36,6 +36,12 @@ const initialState = {
       case 'COLLECTION_CLICKED':{
         return { ...state, clicked: true}
       }
+      case 'GET_USER_HERBS': {
+        return { ...state, userHerbs: action.data}
+      }
+      case 'GET_USER_REMS': {
+        return { ...state, userRemedies: action.data}
+      }
       default: {
         return state;
       }

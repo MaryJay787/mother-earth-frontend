@@ -1,7 +1,28 @@
 import React from 'react';
 import { Button, Card, Image, Divider} from 'semantic-ui-react';
+import ls from 'local-storage';
+
 
 class HerbCard extends React.Component{
+    handleAddRem = (e) => {
+        console.log(e, 'add btn clicked')
+        const user_id = ls.get('id')
+        const rem_id = this.props.id
+        const jwt = ls.get('jwt')
+        console.log('uid', user_id, 'rid', rem_id, jwt)
+        fetch(`http://localhost:3000/add_remedy/${user_id}/${rem_id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify({user_id: user_id, remedy_id: rem_id})
+        })
+        .then(res => res.json())
+        .then(console.log)
+    }
+
     render(){
         return(
             <div>
@@ -18,7 +39,7 @@ class HerbCard extends React.Component{
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                    <Button basic color='green'>
+                    <Button basic color='green' onClick={this.handleAddRem}>
                         Add to Collection
                     </Button>
                     <Button basic color='red'>

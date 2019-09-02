@@ -2,10 +2,8 @@ const PROFILE = "http://localhost:3000/profile"
 const HERBS = "http://localhost:3000/herbs"
 const PLANTS = "http://localhost:3000/plants"
 const REMS = "http://localhost:3000/remedies"
-const user_herbs = `http://localhost:3000/user_herbs/${id}`
 // const add_herb = `http://localhost:3000/add_herb/:user_id/:herb_id`
 // const remove_herb = `http://localhost:3000/remove_herb/:user_id/:herb_id`
-const user_remedies = `http://localhost:3000/user_remedies/${id}`
 // const add_remedy = `http://localhost:3000/add_remedy/:user_id/:remedy_id`
 // const remove_remedy = `http://localhost:3000/remove_remedy/:user_id/:remedy_id`
 
@@ -21,12 +19,22 @@ export function getRemedies() {
     return fetch(REMS).then(res => res.json())
 }
 
-export function getUserHerbs(id){
-    return fetch(user_herbs).then(res => res.json())
+export function getUserHerbs(id, jwt){
+    return fetch(`http://localhost:3000/user_herbs/${id}`, { 
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${jwt}`
+        }
+        }).then(res => res.json())
 }
 
-export function getUserRems(id){
-    return fetch(user_remedies).then(res => res.json())
+export function getUserRems(id, jwt){
+    return fetch(`http://localhost:3000/user_remedies/${id}`,{
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${jwt}`
+            }
+    }).then(res => res.json())
 }
 
 // export function getUserHerbNotes(id){
