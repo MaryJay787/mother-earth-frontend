@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Card, Image, Divider} from 'semantic-ui-react';
+import { Button, Card, Image, Divider, Header} from 'semantic-ui-react';
 import ls from 'local-storage';
+import { Link } from 'react-router-dom'
 
 
 class HerbCard extends React.Component{

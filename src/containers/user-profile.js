@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import HerbCard from '../components/herb-card';
 import RemedyCard from '../components/remedy-card';
 import PlantCard from '../components/plant-card';
+import HerbNotes from '../components/herb_notes';
+import RemedyNotes from '../components/remedy_notes';
 import { connect } from 'react-redux';
 import ls from 'local-storage';
 // import { getUser, getUserHerbs, getUserRems, getUserRemNotes, getUserHerbNotes } from '../fetches/backend';
@@ -44,9 +46,9 @@ class UserProfile extends React.Component {
         case 'my remedies':
             return this.props.userRems.map(rem => <RemedyCard key={rem.id} {...rem}/>);
         case 'herbal notes':
-            return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
+            return this.props.plants.map(plant => <HerbNotes key={plant.id} {...plant}/>);
         case 'remedy notes':
-            return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
+            return this.props.plants.map(plant => <RemedyNotes key={plant.id} {...plant}/>);
         default:
             return null;
         }
@@ -90,9 +92,11 @@ class UserProfile extends React.Component {
                         {this.props.user.bio}
                         </List.Item>
                     </List>
-                    <Link to='/editprofile'><Button content='Edit Profile'/></Link>
                     </Container>
                 </Grid.Column>
+                <Link to='/editprofile'><Button content='Edit Profile'/></Link>
+                <Link to='/create_note'><Button content='Create Note'/></Link>
+
                 </Grid>
 
                 <Divider vertical>And</Divider>

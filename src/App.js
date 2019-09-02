@@ -6,10 +6,10 @@ import LoginSignUp from './containers/login-signup';
 import UserProfile from './containers/user-profile';
 import EditProfile from './containers/edit-profile';
 import Herbs from './containers/herbs-collection';
+import CreateNote from './containers/create-notes';
 // import ls from 'local-storage';
 import { getHerbs, getPlants, getRemedies } from './fetches/backend';
 import { connect } from 'react-redux';
-// import Remedies from './containers/remedies-collection';
 
 
 class App extends React.Component {
@@ -20,8 +20,6 @@ class App extends React.Component {
     getHerbs().then(herbs => this.props.dispatch({ type: 'GET_HERBS', herbs }))
     getPlants().then(plants => this.props.dispatch({ type: 'GET_PLANTS', plants }))
     getRemedies().then(remedies => this.props.dispatch({ type: 'GET_REMS', remedies }))
-
-    
   }
   render(){
     return(
@@ -32,7 +30,7 @@ class App extends React.Component {
           <Route exact path='/userprofile' render={() => (<UserProfile />)} />
           <Route exact path='/herb_collection' render={() => (<Herbs />)}/>
           <Route exact path='/editprofile' render={() => (<EditProfile />)}/>
-
+          <Route exact path='/create_note' render={() => (<CreateNote />)}/>
         </Switch>
       </div>
     )
