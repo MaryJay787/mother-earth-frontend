@@ -1,34 +1,33 @@
 import React from 'react';
-import { Button, Card, Image, Divider} from 'semantic-ui-react';
+import { Segment, Grid, List, Divider, Placeholder} from 'semantic-ui-react';
 
 class PlantCard extends React.Component{
     render(){
         return(
             <div>
-            <Card>
-                <Card.Content>
-                    <p>{this.props.link}</p>
+                <Segment>
+                   <Grid>
+                    <List>
+                        <List.Item as='a'>Plant Name</List.Item>
+                        <List.Item as='https://trefle.io/api/plants/#{@id}?token=Z1hJeEd2T2MrSzczQ1JicFppSFFwdz09'>{this.props.scientific_name}</List.Item>
+                    </List>
                     <Divider/>
-                    <Card.Header textAlign='center'>{this.props.scientific_name}</Card.Header>
-                    <Divider/>
-                    <Card.Meta textAlign='center'>Plant</Card.Meta>
-                    <Card.Description>
-                    <strong>Uses:</strong> Plant Info
-                    Caution: <strong>PlantDangers</strong>
-                    </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                    <div className='ui two buttons'>
-                    <Button basic color='green'>
-                        Add to Collection
-                    </Button>
-                    <Button basic color='red'>
-                        Decline
-                    </Button>
-                    </div>
-                </Card.Content>
-            </Card>
-            <Divider/>
+                    <Placeholder>
+                        <Placeholder.Header image>
+                        <Placeholder.Line />
+                        <Placeholder.Line />
+                        </Placeholder.Header>
+                        <Placeholder.Paragraph>
+                        <Placeholder.Line />
+                        <Placeholder.Line />
+                        <Placeholder.Line />
+                        <Placeholder.Line />
+                        </Placeholder.Paragraph>
+                    </Placeholder>
+                  
+                    
+                    </Grid>
+                   </Segment>
             </div>
         )
     }
