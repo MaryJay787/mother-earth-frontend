@@ -37,9 +37,14 @@ export function getUserRems(id, jwt){
     }).then(res => res.json())
 }
 
-// export function getUserHerbNotes(id){
-
-// }
+export function getUserHerbNotes(id, jwt){
+    return fetch(`http://localhost:3000/users/${id}/notes`,{
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${jwt}`
+        }
+}).then(res => res.json())
+}
 
 // export function getUserRemNotes(id){
 

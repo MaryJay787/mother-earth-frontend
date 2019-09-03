@@ -9,7 +9,9 @@ class PlantCard extends React.Component{
                    <Grid>
                     <List>
                         <List.Item as='a'>Plant Name</List.Item>
-                        <List.Item as='https://trefle.io/api/plants/#{@id}?token=Z1hJeEd2T2MrSzczQ1JicFppSFFwdz09'>{this.props.scientific_name}</List.Item>
+                        {/* <List.Item as='https://trefle.io/api/plants/#{@id}?token=Z1hJeEd2T2MrSzczQ1JicFppSFFwdz09'>{this.props.scientific_name}</List.Item> */}
+                        <List.Item as='a'>{this.props.scientific_name}</List.Item>
+
                     </List>
                     <Divider/>
                     <Placeholder>

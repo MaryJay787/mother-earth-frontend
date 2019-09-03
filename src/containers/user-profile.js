@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Menu, Segment, Header, Image, List, Divider, Container, Button } from 'semantic-ui-react';
+import { Grid, Menu, Segment, Header, Image, List, Divider, Container, Button, Item } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import HerbCard from '../components/herb-card';
 import RemedyCard from '../components/remedy-card';
@@ -9,7 +9,7 @@ import RemedyNotes from '../components/remedy_notes';
 import { connect } from 'react-redux';
 import ls from 'local-storage';
 // import { getUser, getUserHerbs, getUserRems, getUserRemNotes, getUserHerbNotes } from '../fetches/backend';
-import { getUser, getUserHerbs, getUserRems } from '../fetches/backend';
+import { getUser, getUserHerbs, getUserRems, getUserHerbNotes } from '../fetches/backend';
 class UserProfile extends React.Component {
     // state = { activeItem: 'bio' }
 
@@ -22,7 +22,8 @@ class UserProfile extends React.Component {
         getUser(jwt).then(data => this.props.dispatch({ type: 'SAVE_USER', user: data.user}))
         getUserHerbs(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_HERBS', data}))
         getUserRems(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_REMS', data}))
-        // getUserHerbNotes(id).then(data => this.props.dispatch({type: 'GET_USER_HERB_NOTES', data}))
+        getUserHerbNotes(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_HERB_NOTES', data: data.usernotes}))
+        // getUserHerbNotes(id, jwt).then(console.log)
         // getUserRemNotes(id).then(data => this.props.dispatch({type: 'GET_USER_REMS_NOTES', data}))
 
     }
@@ -46,7 +47,7 @@ class UserProfile extends React.Component {
         case 'my remedies':
             return this.props.userRems.map(rem => <RemedyCard key={rem.id} {...rem}/>);
         case 'herbal notes':
-            return this.props.plants.map(plant => <HerbNotes key={plant.id} {...plant}/>);
+            return this.props.herbNotes.map(hnotes => <HerbNotes key={hnotes.id} {...hnotes}/>);
         case 'remedy notes':
             return this.props.plants.map(plant => <RemedyNotes key={plant.id} {...plant}/>);
         default:
@@ -95,7 +96,7 @@ class UserProfile extends React.Component {
                     </Container>
                 </Grid.Column>
                 <Link to='/editprofile'><Button content='Edit Profile'/></Link>
-                <Link to='/create_note'><Button content='Create Note'/></Link>
+                <Link to='/delete_account'><Button content='Delete Account'/></Link>
 
                 </Grid>
 
@@ -139,6 +140,9 @@ class UserProfile extends React.Component {
                     <Grid>
                     {this.clicked ? this.showUserCollection() : null }
                     </Grid>
+                    {/* <Item>
+                    {this.clicked ? this.showUserCollection() : null }
+                    </Item> */}
             </Segment>
             </div>
 
@@ -146,6 +150,6 @@ class UserProfile extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ user: state.herbs.user, active: state.herbs.activeItem, userHerbs: state.herbs.userHerbs.usersherbs, userRems: state.herbs.userRemedies.userRemedies})
+const mapStateToProps = state => ({ herbNotes: state.herbs.herbNotes ,user: state.herbs.user, active: state.herbs.activeItem, userHerbs: state.herbs.userHerbs.usersherbs, userRems: state.herbs.userRemedies.userRemedies})
 
 export default connect(mapStateToProps)(UserProfile);

@@ -5,9 +5,12 @@ const initialState = {
     userHerbs: [],
     userRemedies: [],
     loggedInStatus: false,
+    herbNotes: [],
     user: {},
     activeItem: 'bio',
-    clicked: false
+    clicked: false, 
+    herb_id: null,
+    one_herb: null
   };
   
   export default (state = initialState, action) => {
@@ -42,8 +45,17 @@ const initialState = {
       case 'GET_USER_REMS': {
         return { ...state, userRemedies: action.data}
       }
+      case 'TRACK_HERB_NOTE': {
+        return { ...state, herb_id: action.herb_id }
+      }
+      case 'ONE_HERB': {
+        return { ...state, one_herb: action.data}
+      }
+      case 'GET_USER_HERB_NOTES': {
+        return { ...state, herbNotes: action.data}
+      }
       default: {
         return state;
       }
     }
-  };
+  }; 
