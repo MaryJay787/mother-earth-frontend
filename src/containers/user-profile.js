@@ -45,7 +45,7 @@ class UserProfile extends React.Component {
         case 'my remedies':
             return this.props.userRems.map(rem => <RemedyCard key={rem.id} {...rem}/>);
         case 'notes':
-            return this.props.notes.map(note => <Notes key={note.id} {...note}/>);
+            return this.props.notes.map(note => <Notes key={note.id} note={note}/>);
         default:
             return null;
         }

@@ -59,13 +59,13 @@ const initialState = {
         return { ...state, notes: action.data}
       }
       case 'DELETE_NOTE': {
-        // const index = state.herbs.notes.indexOf(action.id);
+        const index = state.herbs.notes.indexOf(action.note);
         // const element = state.herbs.notes.filter(h => h.id === action.id)
-        console.log('element', action.id)
+        console.log(index)
         // if (index > -1) {
         //   state.herbs.notes.splice(index, 1);
         // }
-        return { ...state, notes: state.herbs.notes}
+        // return { ...state, notes: state.herbs.notes}
       }
       default: {
         return state;
