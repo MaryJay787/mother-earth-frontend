@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button, Card, Image, Divider} from 'semantic-ui-react';
+import { Button, Card, Image, Divider, Header} from 'semantic-ui-react';
 import ls from 'local-storage';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
 class HerbCard extends React.Component{
@@ -28,6 +30,11 @@ class HerbCard extends React.Component{
             <div>
             <Card>
                 <Card.Content>
+                    <Link to='/create_note'>
+                        <Header size='small' textAlign='right' content='Make Note' 
+                        onClick={(e) => this.props.dispatch({type: 'TRACK_REM_NOTE', rem_id: this.props.id})}
+                        />
+                        </Link>
                     <Image src={this.props.image}/>
                     <Divider/>
                     <Card.Header textAlign='center'>{this.props.ailment}</Card.Header>
@@ -54,4 +61,4 @@ class HerbCard extends React.Component{
     }
 }
 
-export default HerbCard
+export default connect()(HerbCard);

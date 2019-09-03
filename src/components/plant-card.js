@@ -35,4 +35,4 @@ class PlantCard extends React.Component{
     }
 }
 
-export default PlantCard
+export default PlantCard;

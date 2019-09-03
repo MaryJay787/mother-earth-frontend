@@ -5,11 +5,12 @@ const initialState = {
     userHerbs: [],
     userRemedies: [],
     loggedInStatus: false,
-    herbNotes: [],
+    notes: [],
     user: {},
     activeItem: 'bio',
     clicked: false, 
     herb_id: null,
+    rem_id: null,
     one_herb: null
   };
   
@@ -48,11 +49,23 @@ const initialState = {
       case 'TRACK_HERB_NOTE': {
         return { ...state, herb_id: action.herb_id }
       }
+      case 'TRACK_REM_NOTE': {
+        return { ...state, rem_id: action.rem_id }
+      }
       case 'ONE_HERB': {
         return { ...state, one_herb: action.data}
       }
-      case 'GET_USER_HERB_NOTES': {
-        return { ...state, herbNotes: action.data}
+      case 'GET_USER_NOTES': {
+        return { ...state, notes: action.data}
+      }
+      case 'DELETE_NOTE': {
+        // const index = state.herbs.notes.indexOf(action.id);
+        // const element = state.herbs.notes.filter(h => h.id === action.id)
+        console.log('element', action.id)
+        // if (index > -1) {
+        //   state.herbs.notes.splice(index, 1);
+        // }
+        return { ...state, notes: state.herbs.notes}
       }
       default: {
         return state;
