@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import HerbCard from '../components/herb-card';
 import RemedyCard from '../components/remedy-card';
 import PlantCard from '../components/plant-card';
-import HerbNotes from '../components/herb_notes';
-import RemedyNotes from '../components/remedy_notes';
+import Notes from '../components/notes';
 import { connect } from 'react-redux';
 import ls from 'local-storage';
 // import { getUser, getUserHerbs, getUserRems, getUserRemNotes, getUserHerbNotes } from '../fetches/backend';
-import { getUser, getUserHerbs, getUserRems, getUserHerbNotes } from '../fetches/backend';
+import { getUser, getUserHerbs, getUserRems, getUserNotes } from '../fetches/backend';
 class UserProfile extends React.Component {
     // state = { activeItem: 'bio' }
 
@@ -22,9 +21,8 @@ class UserProfile extends React.Component {
         getUser(jwt).then(data => this.props.dispatch({ type: 'SAVE_USER', user: data.user}))
         getUserHerbs(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_HERBS', data}))
         getUserRems(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_REMS', data}))
-        getUserHerbNotes(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_HERB_NOTES', data: data.usernotes}))
-        // getUserHerbNotes(id, jwt).then(console.log)
-        // getUserRemNotes(id).then(data => this.props.dispatch({type: 'GET_USER_REMS_NOTES', data}))
+        getUserNotes(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_NOTES', data: data.usernotes}))
+        // getUserRemNotes(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_REMS_NOTES', data}))
 
     }
 
@@ -46,10 +44,8 @@ class UserProfile extends React.Component {
             return this.props.userHerbs.map(herb => <HerbCard key={herb.id} {...herb}/>);
         case 'my remedies':
             return this.props.userRems.map(rem => <RemedyCard key={rem.id} {...rem}/>);
-        case 'herbal notes':
-            return this.props.herbNotes.map(hnotes => <HerbNotes key={hnotes.id} {...hnotes}/>);
-        case 'remedy notes':
-            return this.props.plants.map(plant => <RemedyNotes key={plant.id} {...plant}/>);
+        case 'notes':
+            return this.props.notes.map(note => <Notes key={note.id} {...note}/>);
         default:
             return null;
         }
@@ -122,13 +118,8 @@ class UserProfile extends React.Component {
                     onClick={this.handleItemClick}
                     />
                     <Menu.Item
-                    name='herbal notes'
-                    active={this.props.active === 'herbal notes'}
-                    onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
-                    name='remedy notes'
-                    active={this.props.active === 'remedy notes'}
+                    name='notes'
+                    active={this.props.active === 'notes'}
                     onClick={this.handleItemClick}
                     />
                 </Menu>
@@ -150,6 +141,6 @@ class UserProfile extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ herbNotes: state.herbs.herbNotes ,user: state.herbs.user, active: state.herbs.activeItem, userHerbs: state.herbs.userHerbs.usersherbs, userRems: state.herbs.userRemedies.userRemedies})
+const mapStateToProps = state => ({ notes: state.herbs.notes ,user: state.herbs.user, active: state.herbs.activeItem, userHerbs: state.herbs.userHerbs.usersherbs, userRems: state.herbs.userRemedies.userRemedies})
 
 export default connect(mapStateToProps)(UserProfile);

@@ -37,38 +37,23 @@ export function getUserRems(id, jwt){
     }).then(res => res.json())
 }
 
-export function getUserHerbNotes(id, jwt){
+export function getUserNotes(id, jwt){
     return fetch(`http://localhost:3000/users/${id}/notes`,{
         method: 'GET',
         headers: {
         'Authorization': `Bearer ${jwt}`
         }
-}).then(res => res.json())
+    }).then(res => res.json())
 }
 
-// export function getUserRemNotes(id){
-
-// }
-// export function getUserHerbs(id, jwt){
-//     fetch(`http://localhost:3000/user_herbs/${id}`, {
-//             method: 'GET',
-//             headers: {
-//                 'Authorization': `Bearer ${jwt}`
-//             }
-//         })
-//         .then(res => res.json())
-//         .then(console.log)
-// }
-
-// export function createSushi(formData) {
-//     return fetch(API, {
-//         method: 'POST',
-//         headers: {
-
-//         },
-//         body: JSON.stringify(formData)
-//     }).then(res => res.json())
-// };
+export function deleteNote(id, jwt, note_id){
+    return fetch(`http://localhost:3000/users/${id}/notes/${note_id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${jwt}`
+        }
+    }).then(res => res.json())
+}
 
 export function getUser(jwt) {
     return fetch(PROFILE, {

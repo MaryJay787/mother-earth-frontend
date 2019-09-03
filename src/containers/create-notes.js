@@ -1,18 +1,12 @@
 import React from 'react';
-import { Segment, Form, Header, Image, Grid, Card, Container, Divider} from 'semantic-ui-react';
+import { Segment, Form, Header, Image, Grid, Card, Container, Button} from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import ls from 'local-storage';
 
 class CreateNote extends React.Component{
-    state = {herb: [], date: '', title: '', content: ''}
-    
-    componentDidMount(){
-        console.log(this.props.herb_id)
-        fetch(`http://localhost:3000/herbs/${this.props.herb_id}`)
-        .then(res => res.json())
-        .then(data => this.setState({herb: data.oneHerb}))
-    }
+    state = {herb: [], rem: [], date: '', title: '', content: '', showHerb: false, showRem: false}
+
 
     handleDChange = (e) => {
         console.log(e)
@@ -34,10 +28,39 @@ class CreateNote extends React.Component{
         console.log(e)
         const uID = ls.get('id')
         const jwt = ls.get('jwt')
-        const new_note = {user_id: uID, herb_id: this.props.herb_id, 
+        // const new_note = {user_id: uID, herb_id: this.props.herb_id, 
+        //     date: this.state.date, title: this.state.title, 
+        //     content: this.state.content}
+        const new_herb_note = this.state.showHerb ? {user_id: uID, herb_id: this.props.herb_id, subject_name: this.state.herb.name,
+            image: this.state.herb.image,
             date: this.state.date, title: this.state.title, 
-            content: this.state.content}
-        console.log(new_note)
+            content: this.state.content} : null
+
+        const new_rem_note = this.state.showRem ? {user_id: uID, remedy_id: this.props.rem_id, subject_name: this.state.rem.ailment,
+            image: this.state.rem.image,
+            date: this.state.date, title: this.state.title, 
+            content: this.state.content} : null
+        
+        console.log(new_herb_note, new_rem_note)
+        if (this.state.showHerb){
+            fetch(`http://localhost:3000/users/${uID}/notes`, {
+            method: 'POST',
+            headers:{
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': `Bearer ${jwt}`
+            },
+            body: JSON.stringify(new_herb_note)
+          })
+          .then(res => res.json())
+          .then(data => {
+            if(data){
+                alert('Note Successfully Created')
+                this.props.history.push("/userprofile")
+        }   else
+                alert('Invalid Entries')
+        })
+    } else if (this.state.showRem){
         fetch(`http://localhost:3000/users/${uID}/notes`, {
             method: 'POST',
             headers:{
@@ -45,7 +68,7 @@ class CreateNote extends React.Component{
               'Accept': 'application/json',
               'Authorization': `Bearer ${jwt}`
             },
-            body: JSON.stringify(new_note)
+            body: JSON.stringify(new_rem_note)
           })
           .then(res => res.json())
           .then(data => {
@@ -56,9 +79,25 @@ class CreateNote extends React.Component{
                 alert('Invalid Entries')
         })
     }
-    
+    }
+
+    handleClick = (e) => {
+        const herb_or_rem = e.target.id
+        if (herb_or_rem === '1'){
+            console.log(this.props.herb_id)
+            this.setState({showHerb: true})
+           return fetch(`http://localhost:3000/herbs/${this.props.herb_id}`)
+            .then(res => res.json())
+            .then(data => this.setState({herb: data.oneHerb}))
+        } else if (herb_or_rem === '2'){
+            this.setState({showRem: true})
+           return fetch(`http://localhost:3000/remedies/${this.props.rem_id}`)
+            .then(res => res.json())
+            .then(data => this.setState({rem: data.oneRemedy}))
+        }
+    }
+     
     render(){
-        console.log(this.state.herb.image)
         return(
             <Segment >
                 <Container >
@@ -78,8 +117,14 @@ class CreateNote extends React.Component{
                 <Grid.Column>
                     <Card>
                         <Card.Content>
-                            <Image src={this.state.herb.image} floated='right' size='medium' circular/>
-                            <Card.Header textAlign='center'>{this.state.herb.name}</Card.Header>
+                            <Button content='See Selected Herb' id='1' onClick={this.handleClick}/>
+                            <Button content='See Selected Remedy' id='2' onClick={this.handleClick}/>
+                            <Image src={this.state.showHerb ? this.state.herb.image : null} floated='right' size='medium' circular/>
+                            <Image src={this.state.showRem ? this.state.rem.image : null} floated='right' size='medium' circular/>
+
+                            <Card.Header textAlign='center'>{this.state.showHerb ? this.state.herb.name : null}</Card.Header>
+                            <Card.Header textAlign='center'>{this.state.showRem ? this.state.rem.ailment : null}</Card.Header>
+
                         </Card.Content>
                     </Card>
                 </Grid.Column>
@@ -90,6 +135,6 @@ class CreateNote extends React.Component{
     }
 }
 
-const mapStateToProps = state => ({ herb: state.herbs.one_herb, remedies: state.herbs.userRemedies.userRemedies, herb_id: state.herbs.herb_id})
+const mapStateToProps = state => ({ herb: state.herbs.one_herb, remedies: state.herbs.userRemedies.userRemedies, herb_id: state.herbs.herb_id, rem_id: state.herbs.rem_id})
 
 export default connect(mapStateToProps)(withRouter(CreateNote));
