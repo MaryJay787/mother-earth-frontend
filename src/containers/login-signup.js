@@ -7,7 +7,8 @@ import {
     Header,
     Form,
     Segment,
-    Container
+    Container,
+    Image
   } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import ls from 'local-storage';
@@ -85,18 +86,9 @@ class LoginSignUp extends React.Component{
 
     render(){
         return(
-            <Segment placeholder>
-                {/* <Header
-                  as='h1'
-                  inverted
-                  style={{
-                    backgroundImage: `url(${'https://www.purelyb.com/images/easyblog_shared/Copy-of-bigstock--202339081_20190227-023026_1.jpg'})`,
-                    backgroundSize: 'cover',
-                    fontWeight: 'normal',
-                    marginBottom: 0
-                                  }}
-                  /> */}
-              <Container>
+            <Segment placeholder style={{marginTop: '1em', marginLeft: '2em', marginRight: '2em'}}>
+              <Image stretched src='https://wpcom-themes.svn.automattic.com/yoko/images/headers/plant.jpg' float/>
+              <Container style={{marginTop: '1em', marginLeft: '2em', marginRight: '2em'}} >
               <Grid columns={2} stackable textAlign='center'>
                 <Divider vertical>Or</Divider>
                 {/* <Image src='https://www.purelyb.com/images/easyblog_shared/Copy-of-bigstock--202339081_20190227-023026_1.jpg' fluid /> */}

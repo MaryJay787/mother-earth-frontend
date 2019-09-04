@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Segment, Divider, Header} from 'semantic-ui-react';
+import { Segment, Divider, Button, Header} from 'semantic-ui-react';
 import "../../././node_modules/react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel }  from  'react-responsive-carousel';
 
@@ -10,11 +10,11 @@ class HomePage extends React.Component{
     
     render(){
         return(
-            <Segment>
+            <Segment style={{marginTop: '1em'}}>
                  <Header as='h1' textAlign='center'>Mother Earth</Header>
-                 <Link to='/login'><Header size='small' textAlign='right' content='Login/SignUp'/></Link>
+                 <Link to='/login'><Button size='small' color='black' floated='right' content='Login/SignUp'/></Link>
                  <Divider/>
-                 <Carousel autoPlay infiniteLoop transitionTime={5} >
+                 <Carousel autoPlay infiniteLoop transitionTime={5} style={{marginTop: '10em'}}>
                     <div>
                     <img src='https://assets.epicurious.com/photos/57b34461df05218810c52123/16:9/w_1280%2Cc_limit/54-Herbs_Dark.jpg' alt='' />
                     </div>
