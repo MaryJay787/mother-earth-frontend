@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Header, Button, Segment, Card, Form } from 'semantic-ui-react';
 import ls from 'local-storage';
-import UserProfile from './user-profile'
 
 class EditProfile extends React.Component {
     state = {

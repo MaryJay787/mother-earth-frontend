@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Card, Image, Divider, Header} from 'semantic-ui-react';
+import { Button, Card, Image, Divider} from 'semantic-ui-react';
 import ls from 'local-storage';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
 class HerbCard extends React.Component{
+    state = {herbToggle: false}
     handleAddRem = (e) => {
         console.log(e, 'add btn clicked')
         const user_id = ls.get('id')
@@ -30,11 +30,6 @@ class HerbCard extends React.Component{
             <div>
             <Card>
                 <Card.Content>
-                    <Link to='/create_note'>
-                        <Header size='small' textAlign='right' content='Make Note' 
-                        onClick={(e) => this.props.dispatch({type: 'TRACK_REM_NOTE', rem_id: this.props.id})}
-                        />
-                        </Link>
                     <Image src={this.props.image}/>
                     <Divider/>
                     <Card.Header textAlign='center'>{this.props.ailment}</Card.Header>
@@ -46,12 +41,7 @@ class HerbCard extends React.Component{
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                    <Button basic color='green' onClick={this.handleAddRem}>
-                        Add to Collection
-                    </Button>
-                    <Button basic color='red'>
-                        Decline
-                    </Button>
+                    {this.state.herbToggle ? null : <Button basic color='green' onClick={this.handleAddHerb} content='Add To Collection'/>}
                     </div>
                 </Card.Content>
             </Card>

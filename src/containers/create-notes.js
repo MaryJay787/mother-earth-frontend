@@ -9,23 +9,19 @@ class CreateNote extends React.Component{
 
 
     handleDChange = (e) => {
-        console.log(e)
         this.setState({date: e.target.value})
 
     }
 
     handleTChange = (e) => {
-        console.log(e)
         this.setState({title: e.target.value})
     }
 
     handleNChange = (e) => {
-        console.log(e)
         this.setState({content: e.target.value})
     }
 
     handleSubmit = (e) => {
-        console.log(e)
         const uID = ls.get('id')
         const jwt = ls.get('jwt')
         // const new_note = {user_id: uID, herb_id: this.props.herb_id, 

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Grid, Menu, Segment, Header, Image, List, Divider, Container, Button, Item } from 'semantic-ui-react';
+import { Grid, Menu, Segment, Header, Image, List, Divider, Container, Button} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import HerbCard from '../components/herb-card';
-import RemedyCard from '../components/remedy-card';
-import PlantCard from '../components/plant-card';
+import UserHerbCard from '../components/user-herb-card';
+import UserRemedyCard from '../components/user-remedy-card';
+// import PlantCard from '../components/plant-card';
 import Notes from '../components/notes';
 import { connect } from 'react-redux';
 import ls from 'local-storage';
@@ -28,6 +28,7 @@ class UserProfile extends React.Component {
 
     handleLogout = (e) => {
         ls.remove('jwt')
+        ls.remove('id')
         this.props.dispatch({type: 'LOGOUT'})
     }
 
@@ -41,14 +42,27 @@ class UserProfile extends React.Component {
         case 'profile':
             return null;
         case 'my herbs':
-            return this.props.userHerbs.map(herb => <HerbCard key={herb.id} {...herb}/>);
+            return this.props.userHerbs.map(herb => <UserHerbCard key={herb.id} {...herb}/>);
         case 'my remedies':
-            return this.props.userRems.map(rem => <RemedyCard key={rem.id} {...rem}/>);
+            return this.props.userRems.map(rem => <UserRemedyCard key={rem.id} {...rem}/>);
         case 'notes':
             return this.props.notes.map(note => <Notes key={note.id} note={note}/>);
         default:
             return null;
         }
+    }
+
+    handleDeleteAct = () => {
+        const id = ls.get('id')
+        const jwt = ls.get('jwt')
+        fetch(`http://localhost:3000/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        .then(res => res.json())
+        .then(console.log)
     }
 
     render() {
@@ -92,7 +106,7 @@ class UserProfile extends React.Component {
                     </Container>
                 </Grid.Column>
                 <Link to='/editprofile'><Button content='Edit Profile'/></Link>
-                <Link to='/delete_account'><Button content='Delete Account'/></Link>
+                <Link to='/'><Button content='Delete Account' onClick={this.handleDeleteAct}/></Link>
 
                 </Grid>
 
@@ -131,9 +145,6 @@ class UserProfile extends React.Component {
                     <Grid>
                     {this.clicked ? this.showUserCollection() : null }
                     </Grid>
-                    {/* <Item>
-                    {this.clicked ? this.showUserCollection() : null }
-                    </Item> */}
             </Segment>
             </div>
 

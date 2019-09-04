@@ -9,9 +9,10 @@ class Notes extends React.Component{
         const id = ls.get('id')
         const jwt = ls.get('jwt')
         const note = this.props.note
-        // console.log(id, jwt, note_id)
+        const note_id = this.props.note.id
+        // const a = this.props.herbs.indexOf(note)
         this.props.dispatch({type: 'DELETE_NOTE', note: note})
-        deleteNote(id, jwt, note).then(console.log)
+        deleteNote(id, jwt, note_id).then(console.log)
     }
 
     render(){
@@ -34,5 +35,5 @@ class Notes extends React.Component{
         )
     }
 }
-
-export default connect()(Notes);
+const mapStateToProps = state => ({herbs: state.herbs.notes})
+export default connect(mapStateToProps)(Notes);
