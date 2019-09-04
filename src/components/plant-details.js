@@ -22,7 +22,7 @@ class PlantCardDetails extends React.Component {
 
                         <List.Item>
                         <List.Header>Family Name</List.Header>
-                        {this.props.oneplant.family.name ? this.props.oneplant.family.name : 'Unknown'}
+                        {this.props.oneplant.family ? this.props.oneplant.family.name : 'Unknown'}
                         </List.Item>
 
                         <List.Item>
@@ -32,7 +32,7 @@ class PlantCardDetails extends React.Component {
 
                         <List.Item>
                         <List.Header>Genus</List.Header>
-                        {this.props.oneplant.genus.name ? this.props.oneplant.genus.name : 'Unknown'}
+                        {this.props.oneplant.genus ? this.props.oneplant.genus.name : 'Unknown'}
                         </List.Item>
 
                         <List.Item>
@@ -42,7 +42,7 @@ class PlantCardDetails extends React.Component {
 
                         <List.Item>
                         <List.Header>Division</List.Header>
-                        {this.props.oneplant.division.name ? this.props.oneplant.division.name : 'Unknown'}
+                        {this.props.oneplant.division ? this.props.oneplant.division.name : 'Unknown'}
                         </List.Item>
 
                     </List>

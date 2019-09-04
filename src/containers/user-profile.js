@@ -68,13 +68,34 @@ class UserProfile extends React.Component {
         
         return (
             <div>
-            <Segment>
+            <Segment style={{ marginTop: '1em',
+                                 marginRight: '1em',
+                                 marginLeft: '1em'
+                            }}>
                 <Header as='h1' content='User Profile' />
-                <Link to='/'><Header size='small' content='Logout' textAlign='right' onClick={this.handleLogout} /></Link>
+                <Link to='/'>
+                    <Button color='black' compact floated='right' style={{ marginBottom: '1em' }} onClick={this.handleLogout}>
+                    Logout
+                    </Button>
+                </Link>
+                <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
+                New Herb
+                </Button>
+                <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
+                New Remedy
+                </Button>
+                <Link to='/herb_collection'>
+                    <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
+                    View Mother Earth
+                    </Button>
+                </Link>
             </Segment>
-            <Link to='/herb_collection'><Header size='small' content='View Mother Earth' textAlign='right'/></Link>
             <Divider/>
-                <Grid>
+                <Grid style={{ marginTop: '1em',
+                                 marginRight: '1em',
+                                 marginLeft: '1em',
+                                 marginBottom: '1em'
+                            }}>
                     <Grid.Column stretched width={12}>
                     <Segment>
                     <Grid columns={2} relaxed='very'>
@@ -84,7 +105,10 @@ class UserProfile extends React.Component {
                     </p>
                 </Grid.Column>
                 <Grid.Column>
-                    <Container textAlign='center'>
+                    <Container textAlign='center' style={{ marginTop: '1em',
+                                 marginRight: '1em',
+                                 marginLeft: '1em'
+                            }}>
                     <List>
                         <List.Item>
                         <List.Header>Username</List.Header>{this.props.user.username}
@@ -102,11 +126,15 @@ class UserProfile extends React.Component {
                         {this.props.user.bio}
                         </List.Item>
                     </List>
+                    <Link to='/editprofile'>
+                        <Button compact color='black' content='Edit Profile'/>
+                    </Link>
+                    <Link to='/'>
+                        <Button compact color='black' content='Delete Account' onClick={this.handleDeleteAct}/>
+                    </Link>
+
                     </Container>
                 </Grid.Column>
-                <Link to='/editprofile'><Button content='Edit Profile'/></Link>
-                <Link to='/'><Button content='Delete Account' onClick={this.handleDeleteAct}/></Link>
-
                 </Grid>
 
                 <Divider vertical>And</Divider>
@@ -138,10 +166,16 @@ class UserProfile extends React.Component {
                 </Menu>
                 </Grid.Column>
             </Grid>
-            <Segment>
+            <Segment style={{ marginTop: '1em',
+                                 marginRight: '1em',
+                                 marginLeft: '1em'
+                            }}>
                     <Header as='h1' textAlign='center' content='My Earth'/>
                     <Divider hidden/>
-                    <Grid>
+                    <Grid style={{ marginTop: '1em',
+                                 marginRight: '1em',
+                                 marginLeft: '3.5em'
+                            }}>
                     {this.clicked ? this.showUserCollection() : null }
                     </Grid>
             </Segment>

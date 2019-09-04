@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Item, Button } from 'semantic-ui-react';
+import { Segment, Item, Button, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { deleteNote } from '../fetches/backend';
 import ls from 'local-storage';
@@ -18,6 +18,7 @@ class Notes extends React.Component{
     render(){
         return(
             <Segment>
+                <Container>
                 <Item>
                     <Item.Image size='tiny' src={this.props.note.image} />
                     <Item.Meta>{this.props.note.subject_name}</Item.Meta>
@@ -31,6 +32,7 @@ class Notes extends React.Component{
                         <Button content='Delete Note' onClick={this.handleDelete}/>
                     </Item.Content>
                 </Item>
+                </Container>
             </Segment>
         )
     }

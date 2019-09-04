@@ -32,7 +32,7 @@ class Herbs extends React.Component{
     plantsSwitch(){
         const act = this.state.activeItem
         switch(act){
-        case 'home':
+        case 'plants':
             return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
         default:
             return null;
@@ -56,8 +56,8 @@ class Herbs extends React.Component{
                 </Segment>
                 <Menu pointing>
                     <Menu.Item
-                        name='home'
-                        active={activeItem === 'home'}
+                        name='plants'
+                        active={activeItem === 'plants'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item

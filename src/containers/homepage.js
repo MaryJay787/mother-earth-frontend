@@ -17,15 +17,12 @@ class HomePage extends React.Component{
                  <Carousel autoPlay infiniteLoop transitionTime={5} >
                     <div>
                     <img src='https://assets.epicurious.com/photos/57b34461df05218810c52123/16:9/w_1280%2Cc_limit/54-Herbs_Dark.jpg' alt='' />
-                        <p className="legend">Legend 1</p>
                     </div>
                     <div>
-                    <img src='https://ticotimes.net/wp-content/uploads/2017/10/171021ChancaPiedras.jpg' alt='' />
-                        <p className="legend">Legend 2</p>
+                    <img src='https://cms.splendidtable.org/sites/default/files/styles/w2000/public/herbs_c_Foxys_forest_manufacture-iSTock-GettyImagesPlus-919410030.jpg?itok=XTp2ZSsb' alt='' />
                     </div>
                     <div>
-                    <img src='https://www.betterhealth.vic.gov.au/-/media/bhc/images/healthy-living/herbs_1050x600.jpg?la=en&hash=8B7CF656405714AF29F33DD7611ECC33D1A0CF4E' alt='' />
-                        <p className="legend">Legend 3</p>
+                    <img src='https://herb-society-wisconsin.org/wp-content/uploads/2018/02/herb_photo4-1-e1566762762851.jpg' alt='' />
                     </div>
                 </Carousel>
             </Segment>

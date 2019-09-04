@@ -111,8 +111,8 @@ class CreateNote extends React.Component{
                 <Grid.Column>
                     <Card>
                         <Card.Content>
-                            <Button content='See Selected Herb' id='1' onClick={this.handleClick}/>
-                            <Button content='See Selected Remedy' id='2' onClick={this.handleClick}/>
+                            {this.props.herb_id ? <Button content='See Selected Herb' id='1' onClick={this.handleClick}/> : null}
+                            {this.props.rem_id ? <Button content='See Selected Remedy' id='2' onClick={this.handleClick}/> : null}
                             <Image src={this.state.showHerb ? this.state.herb.image : null} floated='right' size='medium' circular/>
                             <Image src={this.state.showRem ? this.state.rem.image : null} floated='right' size='medium' circular/>
 

@@ -7,6 +7,7 @@ import {
     Header,
     Form,
     Segment,
+    Container
   } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import ls from 'local-storage';
@@ -85,46 +86,60 @@ class LoginSignUp extends React.Component{
     render(){
         return(
             <Segment placeholder>
-    <Grid columns={2} stackable textAlign='center'>
-      <Divider vertical>Or</Divider>
+                {/* <Header
+                  as='h1'
+                  inverted
+                  style={{
+                    backgroundImage: `url(${'https://www.purelyb.com/images/easyblog_shared/Copy-of-bigstock--202339081_20190227-023026_1.jpg'})`,
+                    backgroundSize: 'cover',
+                    fontWeight: 'normal',
+                    marginBottom: 0
+                                  }}
+                  /> */}
+              <Container>
+              <Grid columns={2} stackable textAlign='center'>
+                <Divider vertical>Or</Divider>
+                {/* <Image src='https://www.purelyb.com/images/easyblog_shared/Copy-of-bigstock--202339081_20190227-023026_1.jpg' fluid /> */}
+                <Grid.Row verticalAlign='middle'>
+                  <Grid.Column>
+                
+                      <Header as='h1' content='Sign Up'/>
+                      <Form onSubmit={this.handleSubmit}>
+                          <Form.Field>
+                          <label>Username</label>
+                          <input onChange={this.handleUChange} placeholder='Username' type='text'/>
+                          </Form.Field>
+                          <Form.Field>
+                          <label>Password</label>
+                          <input onChange={this.handlePChange} placeholder='Password' type='password' />
+                          </Form.Field>
+                          <Form.Field>
+                          </Form.Field>
+                          <Button type='submit'>Submit</Button>
+                      </Form>
+                  </Grid.Column>
 
-      <Grid.Row verticalAlign='middle'>
-        <Grid.Column>
-            <Header as='h1' content='Sign Up'/>
-            <Form onSubmit={this.handleSubmit}>
-                <Form.Field>
-                <label>Username</label>
-                <input onChange={this.handleUChange} placeholder='Username' type='text'/>
-                </Form.Field>
-                <Form.Field>
-                <label>Password</label>
-                <input onChange={this.handlePChange} placeholder='Password' type='password' />
-                </Form.Field>
-                <Form.Field>
-                </Form.Field>
-                <Button type='submit'>Submit</Button>
-            </Form>
-        </Grid.Column>
+                  <Grid.Column>
+                      <Header as='h1' content='Login'/>
+                      <Form onSubmit={this.handleLoginSubmit}>
+                          <Form.Field>
+                          <label>Username</label>
+                          <input onChange={this.handleUsChange} placeholder='Username' type='text' />
+                          </Form.Field>
+                          <Form.Field>
+                          <label>Password</label>
+                          <input onChange={this.handlePaChange} placeholder='Password' type='password' />
+                          </Form.Field>
+                          <Form.Field>
+                          </Form.Field>
+                          <Button type='submit'>Submit</Button>
+                      </Form>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
 
-        <Grid.Column>
-            <Header as='h1' content='Login'/>
-            <Form onSubmit={this.handleLoginSubmit}>
-                <Form.Field>
-                <label>Username</label>
-                <input onChange={this.handleUsChange} placeholder='Username' type='text' />
-                </Form.Field>
-                <Form.Field>
-                <label>Password</label>
-                <input onChange={this.handlePaChange} placeholder='Password' type='password' />
-                </Form.Field>
-                <Form.Field>
-                </Form.Field>
-                <Button type='submit'>Submit</Button>
-            </Form>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
-  </Segment>
+              </Container>
+            </Segment>
         )
     }
 }

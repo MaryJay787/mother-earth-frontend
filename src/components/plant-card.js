@@ -14,6 +14,7 @@ class PlantCard extends React.Component{
         }else
         return null
     })
+        // .then(console.log)
     }
 
     // showPlant(data){
