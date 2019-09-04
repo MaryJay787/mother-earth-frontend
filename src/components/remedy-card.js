@@ -5,13 +5,12 @@ import { connect } from 'react-redux';
 
 
 class HerbCard extends React.Component{
-    state = {herbToggle: false}
+    state = {remToggle: false}
     handleAddRem = (e) => {
-        console.log(e, 'add btn clicked')
         const user_id = ls.get('id')
         const rem_id = this.props.id
         const jwt = ls.get('jwt')
-        console.log('uid', user_id, 'rid', rem_id, jwt)
+        this.setState({remToggle: !this.state.remToggle})
         fetch(`http://localhost:3000/add_remedy/${user_id}/${rem_id}`, {
             method: 'POST',
             headers: {
@@ -41,7 +40,7 @@ class HerbCard extends React.Component{
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                    {this.state.herbToggle ? null : <Button basic color='green' onClick={this.handleAddHerb} content='Add To Collection'/>}
+                    {this.state.remToggle ? null : <Button basic color='green' onClick={this.handleAddRem} content='Add To Collection'/>}
                     </div>
                 </Card.Content>
             </Card>

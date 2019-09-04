@@ -63,3 +63,12 @@ export function getUser(jwt) {
         }
     }).then(res => res.json())
 };
+
+export function deleteRemedy(id, jwt, rem_id){
+    return fetch(`http://localhost:3000/remove_remedy/${id}/${rem_id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${jwt}`
+        }
+    }).then(res => res.json())
+}
