@@ -17,7 +17,6 @@ class UserProfile extends React.Component {
     componentDidMount(){
         const jwt = ls.get('jwt')
         const id = ls.get('id')
-        console.log(jwt)
         getUser(jwt).then(data => this.props.dispatch({ type: 'SAVE_USER', user: data.user}))
         getUserHerbs(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_HERBS', data}))
         getUserRems(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_REMS', data}))
@@ -42,7 +41,7 @@ class UserProfile extends React.Component {
         case 'profile':
             return null;
         case 'my herbs':
-            return this.props.userHerbs.map(herb => <UserHerbCard key={herb.id} {...herb}/>);
+            return this.props.userHerbs.map(herb => <UserHerbCard key={herb.id} herb={herb}/>);
         case 'my remedies':
             return this.props.userRems.map(rem => <UserRemedyCard key={rem.id} rem={rem}/>);
         case 'notes':
@@ -61,8 +60,8 @@ class UserProfile extends React.Component {
                 'Authorization': `Bearer ${jwt}`
             }
         })
-        .then(res => res.json())
-        .then(console.log)
+        .then(res => res.text())
+        .then(data => {data ? alert('Account Deleted') : alert('Delete Attempt Failed')})
     }
 
     render() {

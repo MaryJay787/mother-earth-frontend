@@ -11,10 +11,9 @@ class UserRemedyCard extends React.Component{
         const id = ls.get('id')
         const jwt = ls.get('jwt')
         const remedy = this.props.rem
-        const rem_id = this.props.rem.id
-        // const a = this.props.herbs.indexOf(note)
+        const rem_id = this.props.rem.id       
         this.props.dispatch({type: 'DELETE_REM', remedy: remedy})
-        deleteRemedy(id, jwt, rem_id).then(console.log)
+        deleteRemedy(id, jwt, rem_id).then(alert('Remedy Deleted'))
     }
 
     render(){
@@ -22,7 +21,7 @@ class UserRemedyCard extends React.Component{
             <div>
             <Card>
                 <Card.Content>
-                    <Link to='/create_note'><Header size='small' textAlign='right' content='Make Note' onClick={(e) => this.props.dispatch({type: 'TRACK_HERB_NOTE', rem_id: this.props.rem.id})}/></Link>
+                    <Link to='/create_note'><Header size='small' textAlign='right' content='Make Note' onClick={(e) => this.props.dispatch({type: 'TRACK_REM_NOTE', rem_id: this.props.rem.id})}/></Link>
                     <Image src={this.props.rem.image}/>
                     <Divider/>
                     <Card.Header textAlign='center'>{this.props.rem.ailment}</Card.Header>

@@ -66,11 +66,18 @@ const initialState = {
         return { ...state, notes: state.notes}
       }
       case 'DELETE_REM': {
-        const index = state.herbs.userRemedies.indexOf(action.remedy)
+        const index = state.userRemedies.userRemedies.indexOf(action.remedy)
         if (index > -1) {
-          state.herbs.userRemedies.splice(index, 1);
+          state.userRemedies.userRemedies.splice(index, 1);
         }
-        return { ...state, userRemedies: state.herbs.userRemedies}
+        return { ...state }
+      }
+      case 'DELETE_HERB': {
+        const index = state.userHerbs.usersherbs.indexOf(action.herb)
+        if (index > -1) {
+          state.userHerbs.usersherbs.splice(index, 1);
+        }
+        return { ...state }
       }
       default: {
         return state;

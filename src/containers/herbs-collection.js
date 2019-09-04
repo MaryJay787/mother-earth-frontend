@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import HerbCard from '../components/herb-card';
 import RemedyCard from '../components/remedy-card';
 import PlantCard from '../components/plant-card';
-import { Grid, Segment, Header, Divider, Input, Menu} from 'semantic-ui-react';
+import { Grid, Segment, Header, Divider, Input, Menu, List} from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 // import userProfile from './user-profile';
 // import ls from 'local-storage';
@@ -22,12 +22,24 @@ class Herbs extends React.Component{
             return this.props.herbs.map(herb => <HerbCard key={herb.id} {...herb}/>);
         case 'remedies':
             return this.props.remedies.map(rem => <RemedyCard key={rem.id} {...rem}/>);
+        // case 'home':
+        //     return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
+        default:
+            return null;
+        }
+    }
+
+    plantsSwitch(){
+        const act = this.state.activeItem
+        switch(act){
         case 'home':
             return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
         default:
             return null;
+                
+            }
         }
-  }
+  
    
     render(){
         const { activeItem } = this.state
@@ -67,9 +79,11 @@ class Herbs extends React.Component{
                 
                 <Segment>
                 <Grid>
-                    {console.log(this.props.remedies)}
                     {this.herbsSwitch()}
                 </Grid>
+                <List>
+                    {this.plantsSwitch()}
+                </List>
                 </Segment>
             </div>
         )

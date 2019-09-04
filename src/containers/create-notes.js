@@ -37,7 +37,6 @@ class CreateNote extends React.Component{
             date: this.state.date, title: this.state.title, 
             content: this.state.content} : null
         
-        console.log(new_herb_note, new_rem_note)
         if (this.state.showHerb){
             fetch(`http://localhost:3000/users/${uID}/notes`, {
             method: 'POST',
@@ -80,7 +79,6 @@ class CreateNote extends React.Component{
     handleClick = (e) => {
         const herb_or_rem = e.target.id
         if (herb_or_rem === '1'){
-            console.log(this.props.herb_id)
             this.setState({showHerb: true})
            return fetch(`http://localhost:3000/herbs/${this.props.herb_id}`)
             .then(res => res.json())

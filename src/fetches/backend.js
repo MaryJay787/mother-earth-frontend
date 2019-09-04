@@ -70,5 +70,14 @@ export function deleteRemedy(id, jwt, rem_id){
         headers: {
             'Authorization': `Bearer ${jwt}`
         }
-    }).then(res => res.json())
+    }).then(res => res.text())
+}
+
+export function deleteHerb(id, jwt, herb_id){
+    return fetch(`http://localhost:3000/remove_herb/${id}/${herb_id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${jwt}`
+        }
+    }).then(res => res.text())
 }

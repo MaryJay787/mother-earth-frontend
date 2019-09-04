@@ -12,7 +12,7 @@ class Notes extends React.Component{
         const note_id = this.props.note.id
         // const a = this.props.herbs.indexOf(note)
         this.props.dispatch({type: 'DELETE_NOTE', note: note})
-        deleteNote(id, jwt, note_id).then(console.log)
+        deleteNote(id, jwt, note_id).then(alert('Note Deleted'))
     }
 
     render(){

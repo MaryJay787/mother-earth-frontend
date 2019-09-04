@@ -45,10 +45,8 @@ class EditProfile extends React.Component {
         const values = {user: {username: this.state.username, 
             password: this.state.password, image: this.state.image, specialty: this.state.specialty,
             bio: this.state.bio, name: this.state.name }}
-            console.log(values)
             const id = ls.get('id')
             const jwt = ls.get('jwt')
-            console.log(id)
         fetch(`http://localhost:3000/users/${id}`, {
             method: 'PATCH',
             headers:{
