@@ -2,26 +2,25 @@ import React from 'react';
 import { Button, Card, Image, Divider} from 'semantic-ui-react';
 import ls from 'local-storage';
 import { connect } from 'react-redux';
+import { addRemedyToCollection } from '../fetches/backend';
 
 
-class HerbCard extends React.Component{
+class RemedyCard extends React.Component{
     state = {remToggle: false}
     handleAddRem = (e) => {
         const user_id = ls.get('id')
         const rem_id = this.props.id
         const jwt = ls.get('jwt')
-        this.setState({remToggle: !this.state.remToggle})
-        fetch(`http://localhost:3000/add_remedy/${user_id}/${rem_id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'Authorization': `Bearer ${jwt}`
-            },
-            body: JSON.stringify({user_id: user_id, remedy_id: rem_id})
-        })
-        .then(res => res.json())
-        .then(console.log)
+        const array = this.props.userRemedies
+        const remedy_included = array.filter(remedy => remedy.id === rem_id)
+        if(remedy_included === undefined  || remedy_included.length === 0){
+            this.setState({remToggle: !this.state.remToggle})
+            alert('Remedy Added To Collection')
+            return addRemedyToCollection(user_id, rem_id, jwt).then(console.log)
+        }else{ 
+            alert('Remedy Currently In Collection')  
+            return null
+        }
     }
 
     render(){
@@ -49,5 +48,6 @@ class HerbCard extends React.Component{
         )
     }
 }
+const mapStateToProps = state => ({userRemedies: state.herbs.userRemedies.userRemedies})
 
-export default connect()(HerbCard);
+export default connect(mapStateToProps)(RemedyCard);
