@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Card, Image, Divider} from 'semantic-ui-react';
 import ls from 'local-storage';
 import { connect } from 'react-redux'
+import { addHerbToCollection } from '../fetches/backend';
 
 
 class HerbCard extends React.Component{
@@ -10,18 +11,18 @@ class HerbCard extends React.Component{
         const user_id = ls.get('id')
         const herb_id = this.props.id
         const jwt = ls.get('jwt')
-        this.setState({herbToggle: !this.state.herbToggle})
-        fetch(`http://localhost:3000/add_herb/${user_id}/${herb_id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'Authorization': `Bearer ${jwt}`
-            },
-            body: JSON.stringify({user_id: user_id, herb_id: herb_id})
-        })
-        .then(res => res.json())
-        .then(console.log)
+        const array = this.props.userHerbs
+        const herb_included = array.filter(herb => herb.id === herb_id)
+        if(herb_included === undefined  || herb_included.length === 0){
+            this.setState({herbToggle: !this.state.herbToggle})
+            alert('Herb Added To Collection')
+            return addHerbToCollection(user_id, herb_id, jwt).then(console.log)
+        }else{ 
+            alert('Herb Currently In Collection')  
+            return null
+        }
+        
+       
     }
     render(){
         return(
@@ -50,4 +51,6 @@ class HerbCard extends React.Component{
     }
 }
 
-export default connect()(HerbCard);
+const mapStateToProps = state => ({userHerbs: state.herbs.userHerbs.usersherbs})
+
+export default connect(mapStateToProps)(HerbCard);

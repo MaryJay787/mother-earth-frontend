@@ -5,28 +5,44 @@ import RemedyCard from '../components/remedy-card';
 import PlantCard from '../components/plant-card';
 import { Grid, Segment, Header, Divider, Input, Menu, List} from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
-// import userProfile from './user-profile';
-// import ls from 'local-storage';
+import ls from 'local-storage';
 
 
 class Herbs extends React.Component{
-    state = { activeItem: 'home' }
+    state = { activeItem: 'home', searchTerm: ''}
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   herbsSwitch(){
-        // return this.props.herbs.map(herb => <HerbCard key={herb.id} {...herb}/>)
         const act = this.state.activeItem
         switch(act){
         case 'herbs':
             return this.props.herbs.map(herb => <HerbCard key={herb.id} {...herb}/>);
         case 'remedies':
             return this.props.remedies.map(rem => <RemedyCard key={rem.id} {...rem}/>);
-        // case 'home':
-        //     return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
+        // case 'search':
+        //     return this.searching
         default:
             return null;
         }
+    }
+
+    searching(){
+        const term = this.state.searchTerm
+        const searchArray = this.props.herbs.concat(this.props.remedies)
+        searchArray.filter(el => {
+            if(el.name === term){
+                return el
+            } else if (el.ailment === term){
+                return el
+            }
+        })
+    }
+
+    handleSearch = (e) => {
+        console.log(e.target.value)
+       this.setState({searchTerm: e.target.value})
+       return this.searching()
     }
 
     plantsSwitch(){
@@ -39,6 +55,11 @@ class Herbs extends React.Component{
                 
             }
         }
+    handleLogout = (e) => {
+        ls.remove('jwt')
+        ls.remove('id')
+        this.props.dispatch({type: 'LOGOUT'})
+    }
   
    
     render(){
@@ -50,7 +71,7 @@ class Herbs extends React.Component{
                     <Header as='h1' content='Mother Earth' textAlign='center'/>
                     <Grid textAlign='right'>
                     <Divider vertical hidden/>
-                    <Link to='/' ><Header size='small' content='Logout' textAlign='right'/></Link>
+                    <Link to='/' ><Header size='small' content='Logout' textAlign='right' onClick={this.handleLogout}/></Link>
                     <Link to='/userprofile' ><Header size='small' content='Back to Profile' textAlign='right'/></Link>
                     </Grid>
                 </Segment>
@@ -72,14 +93,15 @@ class Herbs extends React.Component{
                     />
                     <Menu.Menu position='right'>
                         <Menu.Item>
-                        <Input icon='search' placeholder='Search...' />
+                        <Input icon='search' placeholder='Search...' onChange={this.handleSearch}/>
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>
                 
-                <Segment>
+                <Segment placeholder >
                 <Grid>
                     {this.herbsSwitch()}
+                    {this.searching()}
                 </Grid>
                 <List>
                     {this.plantsSwitch()}

@@ -105,3 +105,29 @@ export function newRemedy(remedy_values){
       })
       .then(res => res.json())
 }
+
+export function addRemedyToCollection(user_id, rem_id, jwt){
+    return  fetch(`http://localhost:3000/add_remedy/${user_id}/${rem_id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Authorization': `Bearer ${jwt}`
+        },
+        body: JSON.stringify({user_id: user_id, remedy_id: rem_id})
+    })
+    .then(res => res.json())
+}
+
+export function addHerbToCollection(user_id, herb_id, jwt){
+    fetch(`http://localhost:3000/add_herb/${user_id}/${herb_id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Authorization': `Bearer ${jwt}`
+        },
+        body: JSON.stringify({user_id: user_id, herb_id: herb_id})
+    })
+    .then(res => res.json())
+}
