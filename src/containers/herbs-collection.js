@@ -20,8 +20,6 @@ class Herbs extends React.Component{
             return this.props.herbs.map(herb => <HerbCard key={herb.id} {...herb}/>);
         case 'remedies':
             return this.props.remedies.map(rem => <RemedyCard key={rem.id} {...rem}/>);
-        // case 'search':
-        //     return this.searching
         default:
             return null;
         }
@@ -30,19 +28,15 @@ class Herbs extends React.Component{
     searching(){
         const term = this.state.searchTerm
         const searchArray = this.props.herbs.concat(this.props.remedies)
-        searchArray.filter(el => {
-            if(el.name === term){
-                return el
-            } else if (el.ailment === term){
-                return el
-            }
-        })
+        if(searchArray === undefined || searchArray.length === 0 ){
+            return searchArray.filter(el => el.name === term)
+        } else 
+            {searchArray.filter(el => el.ailment === term)}
     }
 
     handleSearch = (e) => {
         console.log(e.target.value)
        this.setState({searchTerm: e.target.value})
-       return this.searching()
     }
 
     plantsSwitch(){
