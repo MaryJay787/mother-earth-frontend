@@ -78,12 +78,16 @@ class UserProfile extends React.Component {
                     Logout
                     </Button>
                 </Link>
-                <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
-                New Herb
-                </Button>
-                <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
-                New Remedy
-                </Button>
+                <Link to='/new_herb'>
+                    <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
+                    New Herb
+                    </Button>
+                </Link>
+                <Link to='/new_remedy'>
+                    <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
+                    New Remedy
+                    </Button>
+                </Link>
                 <Link to='/herb_collection'>
                     <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
                     View Mother Earth
