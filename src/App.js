@@ -7,8 +7,7 @@ import UserProfile from './containers/user-profile';
 import EditProfile from './containers/edit-profile';
 import Herbs from './containers/herbs-collection';
 import CreateNote from './containers/create-notes';
-import NewHerb from './containers/new-herb';
-import NewRemedy from './containers/new-remedy';
+import NewHerbOrRemedy from './containers/new-herb-or-remedy';
 import { getHerbs, getPlants, getRemedies } from './fetches/backend';
 import { connect } from 'react-redux';
 
@@ -32,8 +31,7 @@ class App extends React.Component {
           <Route exact path='/herb_collection' render={() => (<Herbs />)}/>
           <Route exact path='/editprofile' render={() => (<EditProfile />)}/>
           <Route exact path='/create_note' render={() => (<CreateNote />)}/>
-          <Route exact path='/new_herb' render={() => (<NewHerb />)}/>
-          <Route exact path='/new_remedy' render={() => (<NewRemedy />)} />
+          <Route exact path='/new_herb_or_remedy' render={() => (<NewHerbOrRemedy />)}/>
         </Switch>
       </div>
     )

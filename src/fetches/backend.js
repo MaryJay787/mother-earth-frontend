@@ -81,3 +81,27 @@ export function deleteHerb(id, jwt, herb_id){
         }
     }).then(res => res.text())
 }
+
+export function newHerb(herb_values){
+    return  fetch(`http://localhost:3000/herbs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(herb_values)
+      })
+      .then(res => res.json())
+}
+
+export function newRemedy(remedy_values){
+    return  fetch(`http://localhost:3000/remedies`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(remedy_values)
+      })
+      .then(res => res.json())
+}
