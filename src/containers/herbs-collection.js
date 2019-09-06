@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import HerbCard from '../components/herb-card';
 import RemedyCard from '../components/remedy-card';
 import PlantCard from '../components/plant-card';
-import { Grid, Segment, Header, Divider, Input, Menu, List} from 'semantic-ui-react';
+import { Grid, Segment, Header, Divider, Input, Menu, List } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import ls from 'local-storage';
-
+import SearchHerbs from '../components/search-herbs';
+import SearchRemedies from '../components/search-remedies';
 
 class Herbs extends React.Component{
-    state = { activeItem: 'home', searchTerm: ''}
+    state = { activeItem: 'home', searchHerbChange: false, searchRemedyChange: false, searchTerm: '', herbsSearched: [], remediesSearched: []}
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -25,28 +26,13 @@ class Herbs extends React.Component{
         }
     }
 
-    searching(){
-        const term = this.state.searchTerm
-        const searchArray = this.props.herbs.concat(this.props.remedies)
-        if(searchArray === undefined || searchArray.length === 0 ){
-            return searchArray.filter(el => el.name === term)
-        } else 
-            {searchArray.filter(el => el.ailment === term)}
-    }
-
-    handleSearch = (e) => {
-        console.log(e.target.value)
-       this.setState({searchTerm: e.target.value})
-    }
-
     plantsSwitch(){
         const act = this.state.activeItem
         switch(act){
         case 'plants':
             return this.props.plants.map(plant => <PlantCard key={plant.id} {...plant}/>);
         default:
-            return null;
-                
+            return null; 
             }
         }
     handleLogout = (e) => {
@@ -54,8 +40,36 @@ class Herbs extends React.Component{
         ls.remove('id')
         this.props.dispatch({type: 'LOGOUT'})
     }
+
+    handleHerbSearch = (e) => {
+        this.setState({ searchTerm: e.target.value})
+    }
+
+    handleRemedySearch = (e) => {
+        this.setState({ searchTerm: e.target.value})
+    }
+    
+    handleHerbClick = () => {
+        this.setState({ searchHerbChange: !this.state.searchHerbChange})
+    }
+    handleRemedyClick = () => {
+        this.setState({ searchRemedyChange: !this.state.searchRemedyChange})
+    }
+
+    handleHerbFilter = () => {
+         console.log(this.props.herbs)
+         console.log(this.state.searchTerm)
+        const newHerbArray = this.props.herbs.filter(herb => herb.name.toLowerCase().includes(this.state.searchTerm))
+        this.setState({herbsSearched: newHerbArray})
+     }
+    
+    handleRemedyFilter = () => {
+        console.log(this.props.remedies)
+        console.log(this.state.searchTerm)
+        const newRemedyArray = this.props.remedies.filter(remedy => remedy.ailment.toLowerCase().includes(this.state.searchTerm))
+        this.setState({ remediesSearched: newRemedyArray})
+    }
   
-   
     render(){
         const { activeItem } = this.state
 
@@ -87,7 +101,12 @@ class Herbs extends React.Component{
                     />
                     <Menu.Menu position='right'>
                         <Menu.Item>
-                        <Input icon='search' placeholder='Search...' onChange={this.handleSearch}/>
+                        <Input icon='search' placeholder='Search Herbs...' onChange={this.handleHerbSearch} onClick={this.handleHerbClick} onMouseLeave={this.handleHerbFilter}/>
+                        </Menu.Item>
+                    </Menu.Menu>
+                    <Menu.Menu position='right'>
+                        <Menu.Item>
+                        <Input icon='search' placeholder='Search Remedies...' onChange={this.handleRemedySearch} onClick={this.handleRemedyClick} onMouseLeave={this.handleRemedyFilter}/>
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>
@@ -95,7 +114,8 @@ class Herbs extends React.Component{
                 <Segment placeholder >
                 <Grid>
                     {this.herbsSwitch()}
-                    {this.searching()}
+                    {this.state.searchHerbChange ? this.state.herbsSearched.map(herb => <SearchHerbs key={herb.id}{...herb}/>) : null}
+                    {this.state.searchRemedyChange ? this.state.remediesSearched.map(remedy => <SearchRemedies key={remedy.id} {...remedy}/>) : null}
                 </Grid>
                 <List>
                     {this.plantsSwitch()}

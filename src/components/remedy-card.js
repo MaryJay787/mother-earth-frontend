@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Image, Divider} from 'semantic-ui-react';
+import { Button, Card, Image, Divider } from 'semantic-ui-react';
 import ls from 'local-storage';
 import { connect } from 'react-redux';
 import { addRemedyToCollection } from '../fetches/backend';
