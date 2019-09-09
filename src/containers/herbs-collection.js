@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import HerbCard from '../components/herb-card';
 import RemedyCard from '../components/remedy-card';
 import PlantCard from '../components/plant-card';
-import { Grid, Segment, Header, Divider, Input, Menu, List } from 'semantic-ui-react';
+import { Grid, Segment, Header, Divider, Input, Menu, List, Image, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import ls from 'local-storage';
 import SearchHerbs from '../components/search-herbs';
@@ -75,15 +75,26 @@ class Herbs extends React.Component{
 
         return(
             <div>
-                <Segment>
-                    <Header as='h1' content='Mother Earth' textAlign='center'/>
-                    <Grid textAlign='right'>
-                    <Divider vertical hidden/>
-                    <Link to='/' ><Header size='small' content='Logout' textAlign='right' onClick={this.handleLogout}/></Link>
-                    <Link to='/userprofile' ><Header size='small' content='Back to Profile' textAlign='right'/></Link>
+                <Segment style={{marginTop: '1em', marginRight: '1em', marginLeft: '1em'}}>
+                    <Header as='h1' content='Mother Earth' textAlign='center'>
+                        <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                            Mother Earth 
+                        <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                    </Header>
+                    <Grid >
+                        <Divider vertical hidden/>
+                        <Link to='/' >
+                            <Label attached='bottom right' color='blue' content='Logout' onClick={this.handleLogout}/>
+                        </Link>
+                        <Link to='/userprofile' >
+                            <Label attached='bottom left' color='olive'>
+                                Back to Profile
+                                <Image avatar spaced='right' src='http://almalife.in/img/ayur.png' />
+                            </Label>
+                        </Link>
                     </Grid>
                 </Segment>
-                <Menu pointing>
+                <Menu pointing style={{marginRight: '1em', marginLeft: '1em'}}>
                     <Menu.Item
                         name='plants'
                         active={activeItem === 'plants'}
@@ -103,21 +114,19 @@ class Herbs extends React.Component{
                         <Menu.Item>
                         <Input icon='search' placeholder='Search Herbs...' onChange={this.handleHerbSearch} onClick={this.handleHerbClick} onMouseLeave={this.handleHerbFilter}/>
                         </Menu.Item>
-                    </Menu.Menu>
-                    <Menu.Menu position='right'>
                         <Menu.Item>
                         <Input icon='search' placeholder='Search Remedies...' onChange={this.handleRemedySearch} onClick={this.handleRemedyClick} onMouseLeave={this.handleRemedyFilter}/>
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>
                 
-                <Segment placeholder >
+                <Segment placeholder style={{marginRight: '1em', marginLeft: '1em'}}>
                 <Grid>
                     {this.herbsSwitch()}
                     {this.state.searchHerbChange ? this.state.herbsSearched.map(herb => <SearchHerbs key={herb.id}{...herb}/>) : null}
                     {this.state.searchRemedyChange ? this.state.remediesSearched.map(remedy => <SearchRemedies key={remedy.id} {...remedy}/>) : null}
                 </Grid>
-                <List>
+                <List style={{marginTop: '1em'}}>
                     {this.plantsSwitch()}
                 </List>
                 </Segment>

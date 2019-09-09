@@ -3,15 +3,12 @@ import { Grid, Menu, Segment, Header, Image, List, Divider, Container, Button} f
 import { Link } from 'react-router-dom';
 import UserHerbCard from '../components/user-herb-card';
 import UserRemedyCard from '../components/user-remedy-card';
-// import PlantCard from '../components/plant-card';
 import Notes from '../components/notes';
 import { connect } from 'react-redux';
 import ls from 'local-storage';
-// import { getUser, getUserHerbs, getUserRems, getUserRemNotes, getUserHerbNotes } from '../fetches/backend';
 import { getUser, getUserHerbs, getUserRems, getUserNotes } from '../fetches/backend';
-class UserProfile extends React.Component {
-    // state = { activeItem: 'bio' }
 
+class UserProfile extends React.Component {
     handleItemClick = (e, { name }) => this.props.dispatch({type: 'CHANGE_ACTIVE', name })
     
     componentDidMount(){
@@ -21,11 +18,9 @@ class UserProfile extends React.Component {
         getUserHerbs(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_HERBS', data}))
         getUserRems(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_REMS', data}))
         getUserNotes(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_NOTES', data: data.usernotes}))
-        // getUserRemNotes(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_REMS_NOTES', data}))
-
     }
 
-    handleLogout = (e) => {
+    handleLogout = () => {
         ls.remove('jwt')
         ls.remove('id')
         this.props.dispatch({type: 'LOGOUT'})
@@ -65,7 +60,6 @@ class UserProfile extends React.Component {
     }
 
     render() {
-        
         return (
             <div>
             <Segment style={{ marginTop: '1em',
@@ -110,9 +104,6 @@ class UserProfile extends React.Component {
                             }}>
                     <List>
                         <List.Item>
-                        <List.Header>Username</List.Header>{this.props.user.username}
-                        </List.Item>
-                        <List.Item>
                         <List.Header>Name</List.Header>
                         {this.props.user.name}
                         </List.Item>
@@ -124,9 +115,12 @@ class UserProfile extends React.Component {
                         <List.Header>Bio</List.Header>
                         {this.props.user.bio}
                         </List.Item>
+                        <List.Item>
+                        <List.Header>Username</List.Header>{this.props.user.username}
+                        </List.Item>
                     </List>
                     <Link to='/editprofile'>
-                        <Button compact color='black' content='Edit Profile'/>
+                        <Button compact color='black' content='Edit Profile' style={{marginTop: '7em'}}/>
                     </Link>
                     <Link to='/'>
                         <Button compact color='black' content='Delete Account' onClick={this.handleDeleteAct}/>

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Button, Card, Image, Divider, Header} from 'semantic-ui-react';
+import { Button, Card, Image, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteHerb } from '../fetches/backend';
 import ls from 'local-storage';
 
 class UserHerbCard extends React.Component{
-    state = {herbToggle: false}
     handleDelete = () =>{
         const id = ls.get('id')
         const jwt = ls.get('jwt')
@@ -21,7 +20,6 @@ class UserHerbCard extends React.Component{
             <div>
             <Card>
                 <Card.Content>
-                    <Link to='/create_note'><Header size='small' textAlign='right' content='Make Note' onClick={(e) => this.props.dispatch({type: 'TRACK_HERB_NOTE', herb_id: this.props.herb.id})}/></Link>
                     <Image src={this.props.herb.image}/>
                     <Divider/>
                     <Card.Header textAlign='center'>{this.props.herb.name}</Card.Header>
@@ -34,8 +32,11 @@ class UserHerbCard extends React.Component{
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                    {this.state.herbToggle ? null : <Button basic color='red' content='Delete' onClick={this.handleDelete}/> }
-                    
+                    <Button.Group>
+                        <Button basic color='red' onClick={this.handleDelete}>Delete</Button>
+                        <Button.Or />
+                        <Link to='/create_note'><Button basic color='green' positive>Make A Note</Button></Link>
+                    </Button.Group>
                     </div>
                 </Card.Content>
             </Card>

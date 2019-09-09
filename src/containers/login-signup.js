@@ -7,7 +7,7 @@ import {
     Header,
     Form,
     Segment,
-    Container
+    Container, Image
   } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import ls from 'local-storage';
@@ -85,44 +85,42 @@ class LoginSignUp extends React.Component{
 
     render(){
         return(
-            <Segment placeholder style={{marginTop: '1em', marginLeft: '2em', marginRight: '2em'}}>
+            <Segment placeholder color='green' padded='very' style={{marginTop: '1em', marginLeft: '2em', marginRight: '2em'}}>
               <Container style={{marginTop: '1em', marginLeft: '2em', marginRight: '2em'}} >
               <Grid columns={2} stackable textAlign='center'>
                 <Divider vertical>Or</Divider>
-                {/* <Image src='https://www.purelyb.com/images/easyblog_shared/Copy-of-bigstock--202339081_20190227-023026_1.jpg' fluid /> */}
                 <Grid.Row verticalAlign='middle'>
                   <Grid.Column>
-                
-                      <Header as='h1' content='Sign Up'/>
-                      <Form onSubmit={this.handleSubmit}>
-                          <Form.Field>
+                      <Header as='h1' style={{marginRight: '6em'}}>
+                        Sign Up<Image src='https://www.alvita.com/media/catalog/product/g/r/greentea.png'/>
+                        </Header>
+                      <Form onSubmit={this.handleSubmit} style={{marginRight: '9em', marginBottom: '3em'}}>
+                          <Form.Field required>
                           <label>Username</label>
-                          <input onChange={this.handleUChange} placeholder='Username' type='text'/>
+                          <Form.Input icon='user' iconPosition='left' onChange={this.handleUChange} placeholder='Username' type='text'/>
                           </Form.Field>
-                          <Form.Field>
+                          <Form.Field required>
                           <label>Password</label>
-                          <input onChange={this.handlePChange} placeholder='Password' type='password' />
+                          <Form.Input icon='lock' iconPosition='left' onChange={this.handlePChange} placeholder='Password' type='password' />
                           </Form.Field>
-                          <Form.Field>
-                          </Form.Field>
-                          <Button type='submit'>Submit</Button>
+                          <Button type='submit' color='green' fluid >Sign Up</Button>
                       </Form>
                   </Grid.Column>
 
                   <Grid.Column>
-                      <Header as='h1' content='Login'/>
-                      <Form onSubmit={this.handleLoginSubmit}>
-                          <Form.Field>
+                      <Header as='h1' style={{marginLeft: '2em'}}>
+                        Login<Image src='https://img.pngio.com/herb-hedgerow-lemon-balm-skincare-herb-png-500_542.png' /> 
+                      </Header>
+                      <Form onSubmit={this.handleLoginSubmit} style={{marginLeft: '9em', marginBottom: '3em'}}>
+                          <Form.Field required>
                           <label>Username</label>
-                          <input onChange={this.handleUsChange} placeholder='Username' type='text' />
+                          <Form.Input onChange={this.handleUsChange} placeholder='Username' type='text' icon='user' iconPosition='left' />
                           </Form.Field>
-                          <Form.Field>
+                          <Form.Field required>
                           <label>Password</label>
-                          <input onChange={this.handlePaChange} placeholder='Password' type='password' />
+                          <Form.Input onChange={this.handlePaChange} placeholder='Password' type='password' icon='lock' iconPosition='left' />
                           </Form.Field>
-                          <Form.Field>
-                          </Form.Field>
-                          <Button type='submit'>Submit</Button>
+                          <Button type='submit' color='green' fluid >Login</Button>
                       </Form>
                   </Grid.Column>
                 </Grid.Row>

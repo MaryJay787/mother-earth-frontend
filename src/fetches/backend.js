@@ -131,3 +131,4 @@ export function addHerbToCollection(user_id, herb_id, jwt){
     })
     .then(res => res.json())
 }
+
