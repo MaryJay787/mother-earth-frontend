@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Image, Divider } from 'semantic-ui-react';
+import { Button, Card, Image, Divider, Icon } from 'semantic-ui-react';
 import ls from 'local-storage';
 import { connect } from 'react-redux';
 import { addRemedyToCollection } from '../fetches/backend';
@@ -16,7 +16,7 @@ class RemedyCard extends React.Component{
         if(remedy_included === undefined  || remedy_included.length === 0){
             this.setState({remToggle: !this.state.remToggle})
             alert('Remedy Added To Collection')
-            return addRemedyToCollection(user_id, rem_id, jwt).then(console.log)
+            return addRemedyToCollection(user_id, rem_id, jwt)
         }else{ 
             alert('Remedy Currently In Collection')  
             return null
@@ -26,10 +26,9 @@ class RemedyCard extends React.Component{
     render(){
         return(
             <div>
-            <Card>
+            <Card color='olive'>
                 <Card.Content>
                     <Image src={this.props.image}/>
-                    <Divider/>
                     <Card.Header textAlign='center'>{this.props.ailment}</Card.Header>
                     <Divider/>
                     <Card.Meta textAlign='center'>Remedy</Card.Meta>
@@ -39,7 +38,10 @@ class RemedyCard extends React.Component{
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                    {this.state.remToggle ? null : <Button basic color='green' onClick={this.handleAddRem} content='Add To Collection'/>}
+                    {this.state.remToggle ? null : <Button compact animated='fade' basic color='olive' onClick={this.handleAddRem}> 
+                                                    <Button.Content visible><Icon name='thumbtack'/></Button.Content>
+                                                    <Button.Content hidden>Add To Collection</Button.Content>
+                                                    </Button> }
                     </div>
                 </Card.Content>
             </Card>

@@ -57,15 +57,11 @@ class Herbs extends React.Component{
     }
 
     handleHerbFilter = () => {
-         console.log(this.props.herbs)
-         console.log(this.state.searchTerm)
         const newHerbArray = this.props.herbs.filter(herb => herb.name.toLowerCase().includes(this.state.searchTerm))
         this.setState({herbsSearched: newHerbArray})
      }
     
     handleRemedyFilter = () => {
-        console.log(this.props.remedies)
-        console.log(this.state.searchTerm)
         const newRemedyArray = this.props.remedies.filter(remedy => remedy.ailment.toLowerCase().includes(this.state.searchTerm))
         this.setState({ remediesSearched: newRemedyArray})
     }
@@ -76,7 +72,7 @@ class Herbs extends React.Component{
         return(
             <div>
                 <Segment style={{marginTop: '1em', marginRight: '1em', marginLeft: '1em'}}>
-                    <Header as='h1' content='Mother Earth' textAlign='center'>
+                    <Header as='h1' textAlign='center'>
                         <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
                             Mother Earth 
                         <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
@@ -121,7 +117,7 @@ class Herbs extends React.Component{
                 </Menu>
                 
                 <Segment placeholder style={{marginRight: '1em', marginLeft: '1em'}}>
-                <Grid>
+                <Grid style={{marginTop: '1em', marginLeft: '4em'}}>
                     {this.herbsSwitch()}
                     {this.state.searchHerbChange ? this.state.herbsSearched.map(herb => <SearchHerbs key={herb.id}{...herb}/>) : null}
                     {this.state.searchRemedyChange ? this.state.remediesSearched.map(remedy => <SearchRemedies key={remedy.id} {...remedy}/>) : null}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, List, Image } from 'semantic-ui-react';
+import { List, Image, Placeholder, Grid } from 'semantic-ui-react';
 
 class PlantCardDetails extends React.Component {
     render(){
@@ -8,47 +8,59 @@ class PlantCardDetails extends React.Component {
         // console.log(data)
 
         return(
-            <Card centered>
+            <div>
                 {console.log(this.props.oneplant['genus'])}
                 {this.props.oneplant.duration === undefined ? null : (
-                
-                <Card.Content>
-                    {this.props.oneplant.images[0] ? <Image src={this.props.oneplant.images[0].url} size='small' floated='right'/> : 'No Image'}
-                    <List>
-                        <List.Item>
-                        <List.Header>Common Name</List.Header>
-                        {this.props.oneplant.common_name ? this.props.oneplant.common_name : 'Unknown'}
-                        </List.Item>
+                <div>
+                    <Grid columns={2} divided>
+                        <Grid.Row>  
+                        <Grid.Column>
+                            <List floated='right'>
+                                <List.Item >
+                                <List.Header>Common Name</List.Header>
+                                {this.props.oneplant.common_name ? this.props.oneplant.common_name : 'Unknown'}
+                                </List.Item>
 
-                        <List.Item>
-                        <List.Header>Family Name</List.Header>
-                        {this.props.oneplant.family ? this.props.oneplant.family.name : 'Unknown'}
-                        </List.Item>
+                                <List.Item>
+                                <List.Header>Family Name</List.Header>
+                                {this.props.oneplant.family ? this.props.oneplant.family.name : 'Unknown'}
+                                </List.Item>
 
-                        <List.Item>
-                        <List.Header>Family Common Name</List.Header>
-                        {this.props.oneplant.family_common_name ? this.props.oneplant.family_common_name : 'Unknown'}
-                        </List.Item>
+                                <List.Item>
+                                <List.Header>Family Common Name</List.Header>
+                                {this.props.oneplant.family_common_name ? this.props.oneplant.family_common_name : 'Unknown'}
+                                </List.Item>
 
-                        <List.Item>
-                        <List.Header>Genus</List.Header>
-                        {this.props.oneplant.genus ? this.props.oneplant.genus.name : 'Unknown'}
-                        </List.Item>
+                                <List.Item>
+                                <List.Header>Genus</List.Header>
+                                {this.props.oneplant.genus ? this.props.oneplant.genus.name : 'Unknown'}
+                                </List.Item>
 
-                        <List.Item>
-                        <List.Header>Duration</List.Header>
-                        {this.props.oneplant.duration ? this.props.oneplant.duration : 'Unknown'}
-                        </List.Item>
+                                <List.Item>
+                                <List.Header>Duration</List.Header>
+                                {this.props.oneplant.duration ? this.props.oneplant.duration : 'Unknown'}
+                                </List.Item>
 
-                        <List.Item>
-                        <List.Header>Division</List.Header>
-                        {this.props.oneplant.division ? this.props.oneplant.division.name : 'Unknown'}
-                        </List.Item>
-
-                    </List>
-                </Card.Content>
+                                <List.Item>
+                                <List.Header>Division</List.Header>
+                                {this.props.oneplant.division ? this.props.oneplant.division.name : 'Unknown'}
+                                </List.Item>
+                            </List>
+                        </Grid.Column>
+                        <Grid.Column>
+                                {
+                                this.props.oneplant.images[0] ? 
+                                <Image src={this.props.oneplant.images[0].url} size='large' style={{marginRight: '15em'}}/> : 
+                                <Placeholder inverted style={{ marginTop: '4em',marginLeft: '6em',height: 150, width: 150 }}>
+                                    <Placeholder.Image />
+                                </Placeholder>
+                            }
+                        </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </div>
                 )}
-            </Card>
+            </div>
         )
     }
 }
