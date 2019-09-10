@@ -34,7 +34,11 @@ class UserRemedyCard extends React.Component{
                     <Button.Group>
                         <Button basic color='red' onClick={this.handleDelete}>Delete</Button>
                         <Button.Or />
-                        <Link to='/create_note'><Button basic color='green' positive>Make A Note</Button></Link>
+                        <Link to='/create_note'>
+                            <Button basic color='green' positive onClick={() => this.props.dispatch({type: 'TRACK_REM_NOTE', rem_id: this.props.rem.id})}>
+                                Make A Note
+                            </Button>
+                        </Link>
                     </Button.Group>
                     </div>
                 </Card.Content>

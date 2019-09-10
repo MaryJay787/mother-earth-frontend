@@ -79,6 +79,15 @@ const initialState = {
         }
         return { ...state }
       }
+      case 'CLR_REM_TRACKER': {
+        return { ...state, rem_id: null}
+      }
+      case 'CLR_HERB_TRACKER':{
+        return {...state, herb_id: null}
+      }
+      case 'CLR_HERB_&_REM_TRACKER': {
+        return {...state, herb_id: null, rem_id: null}
+      }
       default: {
         return state;
       }

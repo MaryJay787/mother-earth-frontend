@@ -1,7 +1,7 @@
 import React from 'react';
-import { Segment, Form, Header, Image, Grid, Card, Container, Button} from 'semantic-ui-react';
+import { Segment, Form, Header, Image, Grid, Card, Container, Button, Label, Divider} from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import ls from 'local-storage';
 
 class CreateNote extends React.Component{
@@ -10,7 +10,6 @@ class CreateNote extends React.Component{
 
     handleDChange = (e) => {
         this.setState({date: e.target.value})
-
     }
 
     handleTChange = (e) => {
@@ -24,9 +23,6 @@ class CreateNote extends React.Component{
     handleSubmit = (e) => {
         const uID = ls.get('id')
         const jwt = ls.get('jwt')
-        // const new_note = {user_id: uID, herb_id: this.props.herb_id, 
-        //     date: this.state.date, title: this.state.title, 
-        //     content: this.state.content}
         const new_herb_note = this.state.showHerb ? {user_id: uID, herb_id: this.props.herb_id, subject_name: this.state.herb.name,
             image: this.state.herb.image,
             date: this.state.date, title: this.state.title, 
@@ -39,42 +35,44 @@ class CreateNote extends React.Component{
         
         if (this.state.showHerb){
             fetch(`http://localhost:3000/users/${uID}/notes`, {
-            method: 'POST',
-            headers:{
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              'Authorization': `Bearer ${jwt}`
-            },
-            body: JSON.stringify(new_herb_note)
-          })
-          .then(res => res.json())
-          .then(data => {
-            if(data){
-                alert('Note Successfully Created')
-                this.props.history.push("/userprofile")
-        }   else
-                alert('Invalid Entries')
-        })
-    } else if (this.state.showRem){
-        fetch(`http://localhost:3000/users/${uID}/notes`, {
-            method: 'POST',
-            headers:{
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              'Authorization': `Bearer ${jwt}`
-            },
-            body: JSON.stringify(new_rem_note)
-          })
-          .then(res => res.json())
-          .then(data => {
-            if(data){
-                alert('Note Successfully Created')
-                this.props.history.push("/userprofile")
-        }   else
-                alert('Invalid Entries')
-        })
-    }
-    }
+                method: 'POST',
+                headers:{
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+                },
+                body: JSON.stringify(new_herb_note)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data){
+                    alert('Note Successfully Created')
+                    this.props.dispatch({type: 'CLR_HERB_TRACKER'})
+                    this.props.history.push("/userprofile")
+                }else
+                    alert('Invalid Entries')
+                })
+        }else if (this.state.showRem){
+            fetch(`http://localhost:3000/users/${uID}/notes`, {
+                method: 'POST',
+                headers:{
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+                },
+                body: JSON.stringify(new_rem_note)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data){
+                    alert('Note Successfully Created')
+                    this.props.dispatch({type: 'CLR_REM_TRACKER'})
+                    this.props.history.push("/userprofile")
+                }else
+                    alert('Invalid Entries')
+                })
+            }
+        }
 
     handleClick = (e) => {
         const herb_or_rem = e.target.id
@@ -83,7 +81,7 @@ class CreateNote extends React.Component{
            return fetch(`http://localhost:3000/herbs/${this.props.herb_id}`)
             .then(res => res.json())
             .then(data => this.setState({herb: data.oneHerb}))
-        } else if (herb_or_rem === '2'){
+        }else if (herb_or_rem === '2'){
             this.setState({showRem: true})
            return fetch(`http://localhost:3000/remedies/${this.props.rem_id}`)
             .then(res => res.json())
@@ -93,32 +91,33 @@ class CreateNote extends React.Component{
      
     render(){
         return(
-            <Segment >
+            <Segment color='olive'>
                 <Container >
-                <Header as='h1' content='Create Note' textAlign='center'/>
-
+                <Header as='h1' color='olive' content='Create Note' textAlign='center'/> 
+                <Divider/>                   
+                <Link to='/userprofile'>
+                    <Label attached='bottom right' color='olive' content='Back to Profile' onClick={() => this.props.dispatch({type: 'CLR_HERB_&_REM_TRACKER'})}/>
+                </Link>
                 <Grid columns={2} padded='vertically'>
-                    <Grid.Column>
-                        <Form onSubmit={this.handleSubmit}>
+                    <Grid.Column >
+                        <Form onSubmit={this.handleSubmit} style={{marginLeft: '10em'}}>
                             <Form.Group widths='equal'>
-                            <Form.Input fluid label='Date' placeholder='Date' onChange={this.handleDChange}/>
-                            <Form.Input fluid label='Title' placeholder='Title' onChange={this.handleTChange} />
+                            <Form.Input required fluid label='Date' placeholder='Date' onChange={this.handleDChange}/>
+                            <Form.Input required fluid label='Title' placeholder='Title' onChange={this.handleTChange} />
                             </Form.Group>
-                            <Form.TextArea label='Note' placeholder='This herb or remedy is...' onChange={this.handleNChange}/>
-                            <Form.Button>Submit</Form.Button>
+                            <Form.TextArea required label='Note' placeholder='This herb or remedy is...' onChange={this.handleNChange}/>
+                            <Form.Button color='olive' compact style={{marginLeft: '11.5em'}}>Submit</Form.Button>
                         </Form>
                     </Grid.Column>
                 <Grid.Column>
-                    <Card>
+                    <Card style={{marginLeft: '8em'}}>
+                        {this.props.herb_id ? <Button color='olive' content='See Selected Herb' id='1' onClick={this.handleClick}/> : null}
+                        {this.props.rem_id ? <Button color='olive' content='See Selected Remedy' id='2' onClick={this.handleClick}/> : null}
                         <Card.Content>
-                            {this.props.herb_id ? <Button content='See Selected Herb' id='1' onClick={this.handleClick}/> : null}
-                            {this.props.rem_id ? <Button content='See Selected Remedy' id='2' onClick={this.handleClick}/> : null}
                             <Image src={this.state.showHerb ? this.state.herb.image : null} floated='right' size='medium' circular/>
                             <Image src={this.state.showRem ? this.state.rem.image : null} floated='right' size='medium' circular/>
-
                             <Card.Header textAlign='center'>{this.state.showHerb ? this.state.herb.name : null}</Card.Header>
                             <Card.Header textAlign='center'>{this.state.showRem ? this.state.rem.ailment : null}</Card.Header>
-
                         </Card.Content>
                     </Card>
                 </Grid.Column>
