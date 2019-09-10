@@ -92,21 +92,26 @@ class CreateNote extends React.Component{
     render(){
         return(
             <Segment color='olive'>
+                <Header as='h1' textAlign='left' style={{fontFamily: 'Tangerine, cursive'}}>
+                        <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                            Mother Earth 
+                        <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                    </Header>
                 <Container >
-                <Header as='h1' color='olive' content='Create Note' textAlign='center'/> 
+                <Header color='olive' content='Create Note' textAlign='center' style={{fontFamily: 'Tangerine, cursive', fontSize: '45px'}}/> 
                 <Divider/>                   
                 <Link to='/userprofile'>
-                    <Label attached='bottom right' color='olive' content='Back to Profile' onClick={() => this.props.dispatch({type: 'CLR_HERB_&_REM_TRACKER'})}/>
+                    <Label attached='bottom right' color='olive' content='Back to Profile' style={{fontFamily: 'Tangerine, cursive'}} onClick={() => this.props.dispatch({type: 'CLR_HERB_&_REM_TRACKER'})}/>
                 </Link>
                 <Grid columns={2} padded='vertically'>
                     <Grid.Column >
-                        <Form onSubmit={this.handleSubmit} style={{marginLeft: '10em'}}>
+                        <Form onSubmit={this.handleSubmit} style={{marginLeft: '10em', fontFamily: 'Poiret One, cursive'}}>
                             <Form.Group widths='equal'>
                             <Form.Input required fluid label='Date' placeholder='Date' onChange={this.handleDChange}/>
                             <Form.Input required fluid label='Title' placeholder='Title' onChange={this.handleTChange} />
                             </Form.Group>
                             <Form.TextArea required label='Note' placeholder='This herb or remedy is...' onChange={this.handleNChange}/>
-                            <Form.Button color='olive' compact style={{marginLeft: '11.5em'}}>Submit</Form.Button>
+                            <Form.Button color='olive' compact style={{marginLeft: '11.5em', fontFamily: 'Poiret One, cursive'}}>Submit</Form.Button>
                         </Form>
                     </Grid.Column>
                 <Grid.Column>

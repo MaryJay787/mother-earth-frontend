@@ -7,11 +7,12 @@ import {
     Container,
     Header,
     Grid,
-    Divider
+    Divider,
+    Label,
+    Image
   } from 'semantic-ui-react';
 import { newHerb, newRemedy } from '../fetches/backend';
 import { withRouter, Link } from 'react-router-dom';
-
 
 class NewHerbOrRemedy extends React.Component{
     state = {
@@ -83,84 +84,100 @@ class NewHerbOrRemedy extends React.Component{
 
     render(){
         return(
-            <Container style={{marginTop: '1em'}}>
-                <Header textAlign='center' size='huge' content='Mother Earth'/>
-                <Grid columns={2}>
-                    <Grid.Column>
-                        <Form onSubmit={this.handleHerbSubmit} style={{marginRight: '9em'}}>
-                            <Header as='h1' textAlign='center' content='New Herb' />
-                            <Form.Group widths='equal'>
-                            <Form.Field
-                                control={Input}
-                                label='Herb Name'
-                                placeholder='Name'
-                                onChange={this.handleHerbName}
-                            />
-                            <Form.Field
-                                control={Input}
-                                label='Herb Latin Name'
-                                placeholder='A.K.A'
-                                onChange={this.handleAka}
-                            />
-                            
-                            </Form.Group>
-                            <Form.Field
-                                control={Input}
-                                label='Image'
-                                placeholder='Image Url'
-                                onChange={this.handleImage}
-                            />
-                            <Form.Field
-                                control={Input}
-                                label='Caution'
-                                placeholder='Herb Caution'
-                                onChange={this.handleCaution}
-                            />
-                            <Form.Field
-                            control={TextArea}
-                            label='Herb Benefits'
-                            placeholder='Herb benefits and Uses...'
-                            onChange={this.handleUse}
-                            />
-                            
-                            <Form.Field control={Button} style={{marginLeft: '12em'}}>Submit</Form.Field>
-                        </Form>
+            <div>
+                <Header as='h1' textAlign='left' style={{ fontFamily: 'Tangerine, cursive'}}> 
+                    <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                        Mother Earth 
+                    <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                </Header>
+                <Container style={{marginTop: '1em'}} >
+                    <Link to='/userprofile'>
+                        <Label attached='top right' color='olive' content='Back to Profile' style={{fontFamily: 'Poiret One, cursive'}}/>
+                    </Link>
 
-                    </Grid.Column>
-                    <Grid.Column>
-                            <Form onSubmit={this.handleRemedySubmit} style={{marginLeft: '9em'}}>
-                                <Header as='h1' textAlign='center' content='New Remedy' />
+                    <Divider/>
+
+                    <Grid columns={2}>
+                        <Grid.Column>
+                            <Form onSubmit={this.handleHerbSubmit} style={{marginRight: '9em', fontFamily: 'Poiret One, cursive'}}>
+                                <Header as='h1' color='olive' textAlign='center' content='New Herb' style={{fontFamily: 'Tangerine, cursive' }} />
                                 <Form.Group widths='equal'>
                                 <Form.Field
+                                    required
                                     control={Input}
-                                    label='Image'
-                                    placeholder='Remedy Url'
-                                    onChange={this.handleRemUrl}
+                                    label='Herb Name'
+                                    placeholder='Name'
+                                    onChange={this.handleHerbName}
                                 />
                                 <Form.Field
+                                    required
                                     control={Input}
-                                    label='Ailment'
-                                    placeholder='Remedy Name'
-                                    onChange={this.handleRemName}
+                                    label='Herb Latin Name'
+                                    placeholder='A.K.A'
+                                    onChange={this.handleAka}
                                 />
                                 </Form.Group>
                                 <Form.Field
+                                    required
+                                    control={Input}
+                                    label='Image'
+                                    placeholder='Herb Url'
+                                    onChange={this.handleImage}
+                                />
+                                <Form.Field
+                                    required
+                                    control={Input}
+                                    label='Caution'
+                                    placeholder='Herb Caution'
+                                    onChange={this.handleCaution}
+                                />
+                                <Form.Field
+                                required
                                 control={TextArea}
-                                label='Solution'
-                                placeholder='This remedy solution is...'
-                                onChange={this.handleSolution}
+                                label='Herb Benefits'
+                                placeholder='Herb benefits and Uses...'
+                                onChange={this.handleUse}
                                 />
                                 
-                                <Form.Field control={Button} style={{marginLeft: '12em'}}>Submit</Form.Field>
+                                <Form.Field control={Button} fluid compact color='olive' style={{fontFamily: 'Poiret One, cursive'}}>Submit</Form.Field>
                             </Form>
-                    </Grid.Column>
-                </Grid>
-                <Link to='/userprofile'>
-                <Button floated='right' color='black' content='Back to Profile'/>
-                </Link>
-                
-                <Divider vertical> OR </Divider>
-            </Container>
+
+                        </Grid.Column>
+                        <Grid.Column>
+                                <Form onSubmit={this.handleRemedySubmit} style={{marginLeft: '9em', fontFamily: 'Poiret One, cursive'}}>
+                                    <Header as='h1' color='olive' textAlign='center' content='New Remedy' style={{fontFamily: 'Tangerine, cursive' }}/>
+                                    <Form.Group widths='equal'>
+                                    <Form.Field
+                                        required
+                                        control={Input}
+                                        label='Image'
+                                        placeholder='Remedy Url'
+                                        onChange={this.handleRemUrl}
+                                    />
+                                    <Form.Field
+                                        required
+                                        control={Input}
+                                        label='Ailment'
+                                        placeholder='Remedy Name'
+                                        onChange={this.handleRemName}
+                                    />
+                                    </Form.Group>
+                                    <Form.Field
+                                    required
+                                    control={TextArea}
+                                    label='Solution'
+                                    placeholder='This remedy solution is...'
+                                    onChange={this.handleSolution}
+                                    />
+                                    
+                                    <Form.Field control={Button} fluid compact color='olive' style={{fontFamily: 'Poiret One, cursive'}}>Submit</Form.Field>
+                                </Form>
+                        </Grid.Column>
+                    </Grid>
+                    
+                    <Divider vertical hidden/>
+                </Container>
+            </div>
         )
     }
 }

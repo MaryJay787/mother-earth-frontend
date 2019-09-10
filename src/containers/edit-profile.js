@@ -1,6 +1,6 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { Header, Button, Segment, Card, Form } from 'semantic-ui-react';
+import { withRouter, Link } from 'react-router-dom';
+import { Header, Button, Segment, Form, Divider, Label, Image } from 'semantic-ui-react';
 import ls from 'local-storage';
 
 class EditProfile extends React.Component {
@@ -36,10 +36,6 @@ class EditProfile extends React.Component {
         this.setState({password: e.target.value})
     }
 
-    // redirect(){
-    //     return <UserProfile />
-    // }
-
     handleSubmit = (e) => {
         e.preventDefault()
         const values = {user: {username: this.state.username, 
@@ -69,36 +65,51 @@ class EditProfile extends React.Component {
     render(){
         return(
             <div>
-                <Header as='h1' content='Edit Profile' textAlign='center' />
-
-                <Segment>
-                    <Card centered>
-                <Form onSubmit={this.handleSubmit}>
-                    <Form.Field>
-                    <label>Profile Picture</label>
-                    <input placeholder='Image Url' onChange={this.handlePChange} />
-                    </Form.Field>
-                    <Form.Field>
-                    <label>Username</label>
-                    <input placeholder='Username' onChange={this.handleUChange} />
-                    </Form.Field>
-                    <Form.Field>
-                    <label>Name</label>
-                    <input placeholder='Name' onChange={this.handleNChange} />
-                    </Form.Field>
-                    <Form.Field>
-                    <label>Specialty</label>
-                    <input placeholder='Specialty' onChange={this.handleSChange} />
-                    </Form.Field>
-                    <Form.Field>
-                    <label>Password</label>
-                    <input placeholder='Password' onChange={this.handlePaChange} />
-                    </Form.Field>
-                    <Form.TextArea label='Bio' placeholder='Tell us more about you...' onChange={this.handleBChange} />
+                <Header as='h1' textAlign='left' style={{ fontFamily: 'Tangerine, cursive'}}> 
+                    <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                        Mother Earth 
+                    <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                </Header>
+                <Segment color='olive' style={{marginRight: '3em', marginLeft: '3em', marginTop: '1em'}}>
+                <Header as='h1' content='Edit Profile' textAlign='center' color='olive' style={{fontFamily: 'Tangerine, cursive'}}/>
+                <Link to='/userprofile'>
+                    <Label content='Back to Profile' attached='top right' color='olive' style={{fontFamily: 'Tangerine, cursive' }}/>
+                </Link>
+                <Divider/>
+                <Form onSubmit={this.handleSubmit} style={{fontFamily: 'Poiret One, cursive'}}>
+                    <Form.Group widths='equal'>
+                        <Form.Field >
+                        <label>Profile Picture</label>
+                        <input placeholder='Image Url' onChange={this.handlePChange} />
+                        </Form.Field>
+                    </Form.Group>
                     
-                    <Button type='submit'>Submit</Button>
+                    <Form.Group >
+                        <Form.Field required>
+                            <label>Username</label>
+                            <input placeholder='Username' onChange={this.handleUChange} />
+                            </Form.Field>
+                            <Form.Field>
+                            <label>Name</label>
+                            <input placeholder='Name' onChange={this.handleNChange} />
+                            </Form.Field>
+                            <Form.Field>
+                            <label>Specialty</label>
+                            <input placeholder='Specialty' onChange={this.handleSChange} />
+                        </Form.Field>
+                    </Form.Group>
+
+                    <Form.Group >
+                        <Form.Field required>
+                        <label>Password</label>
+                        <input placeholder='Password' onChange={this.handlePaChange} />
+                        </Form.Field>
+                    </Form.Group>
+                    <Form.TextArea label='Bio' placeholder='Tell us more about you...' onChange={this.handleBChange} />
+
+
+                    <Button type='submit' fluid compact color='olive' style={{fontFamily: 'Poiret One, cursive'}}>Submit</Button>
                 </Form>
-                </Card>
             </Segment>
             </div>
         )

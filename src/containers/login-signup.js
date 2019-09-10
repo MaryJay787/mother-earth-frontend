@@ -12,7 +12,6 @@ import {
 import { connect } from 'react-redux'
 import ls from 'local-storage';
 
-
 class LoginSignUp extends React.Component{
   state = {
     username: '',
@@ -85,16 +84,17 @@ class LoginSignUp extends React.Component{
 
     render(){
         return(
+          <div>
             <Segment placeholder color='green' padded='very' style={{marginTop: '1em', marginLeft: '2em', marginRight: '2em'}}>
               <Container style={{marginTop: '1em', marginLeft: '2em', marginRight: '2em'}} >
               <Grid columns={2} stackable textAlign='center'>
                 <Divider vertical>Or</Divider>
                 <Grid.Row verticalAlign='middle'>
                   <Grid.Column>
-                      <Header as='h1' style={{marginRight: '6em'}}>
+                      <Header as='h1' style={{fontFamily: 'Tangerine, cursive' }}>
                         Sign Up<Image src='https://www.alvita.com/media/catalog/product/g/r/greentea.png'/>
                         </Header>
-                      <Form onSubmit={this.handleSubmit} style={{marginRight: '9em', marginBottom: '3em'}}>
+                      <Form onSubmit={this.handleSubmit} style={{marginRight: '9em', marginBottom: '3em', fontFamily: 'Poiret One, cursive'}}>
                           <Form.Field required>
                           <label>Username</label>
                           <Form.Input icon='user' iconPosition='left' onChange={this.handleUChange} placeholder='Username' type='text'/>
@@ -103,15 +103,15 @@ class LoginSignUp extends React.Component{
                           <label>Password</label>
                           <Form.Input icon='lock' iconPosition='left' onChange={this.handlePChange} placeholder='Password' type='password' />
                           </Form.Field>
-                          <Button type='submit' color='green' fluid >Sign Up</Button>
+                          <Button type='submit' color='green' fluid  style={{fontFamily: 'Poiret One, cursive'}}>Sign Up</Button>
                       </Form>
                   </Grid.Column>
 
                   <Grid.Column>
-                      <Header as='h1' style={{marginLeft: '2em'}}>
+                      <Header as='h1' style={{marginLeft: '6em', fontFamily: 'Tangerine, cursive'}}>
                         Login<Image src='https://img.pngio.com/herb-hedgerow-lemon-balm-skincare-herb-png-500_542.png' /> 
                       </Header>
-                      <Form onSubmit={this.handleLoginSubmit} style={{marginLeft: '9em', marginBottom: '3em'}}>
+                      <Form onSubmit={this.handleLoginSubmit} style={{marginLeft: '9em', marginBottom: '3em', fontFamily: 'Poiret One, cursive'}}>
                           <Form.Field required>
                           <label>Username</label>
                           <Form.Input onChange={this.handleUsChange} placeholder='Username' type='text' icon='user' iconPosition='left' />
@@ -120,7 +120,7 @@ class LoginSignUp extends React.Component{
                           <label>Password</label>
                           <Form.Input onChange={this.handlePaChange} placeholder='Password' type='password' icon='lock' iconPosition='left' />
                           </Form.Field>
-                          <Button type='submit' color='green' fluid >Login</Button>
+                          <Button type='submit' color='green' fluid style={{fontFamily: 'Poiret One, cursive'}}>Login</Button>
                       </Form>
                   </Grid.Column>
                 </Grid.Row>
@@ -128,6 +128,7 @@ class LoginSignUp extends React.Component{
 
               </Container>
             </Segment>
+            </div>
         )
     }
 }

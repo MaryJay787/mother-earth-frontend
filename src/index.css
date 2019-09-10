@@ -7,7 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+} */
+
+@font-face {
+  font-family: 'Dancing Script', cursive;
+  src: local('DancingScript'), url(./fonts/DancingScript-Regular.ttf) format('truetype');
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif
 }
