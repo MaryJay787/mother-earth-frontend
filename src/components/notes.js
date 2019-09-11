@@ -12,24 +12,27 @@ class Notes extends React.Component{
         const note_id = this.props.note.id
         // const a = this.props.herbs.indexOf(note)
         this.props.dispatch({type: 'DELETE_NOTE', note: note})
-        deleteNote(id, jwt, note_id).then(alert('Note Deleted'))
+        deleteNote(id, jwt, note_id).then(data => {
+            if(data) {
+                window.location.assign('/userprofile')
+            }
+        })
     }
 
     render(){
         return(
             <Segment>
                 <Container>
-                <Item>
-                    <Item.Image size='tiny' src={this.props.note.image} />
-                    <Item.Meta>{this.props.note.subject_name}</Item.Meta>
+                <Item style={{fontFamily: 'Poiret One, cursive'}}>
+                    <Item.Image size='small' src={this.props.note.image} />
+                    <Item.Meta>Note Topic: {this.props.note.subject_name}</Item.Meta>
                     <Item.Content>
-                        <Item.Header as='a'>{this.props.note.title}</Item.Header>
-                        <Item.Meta>{this.props.note.date}</Item.Meta>
-                        <Item.Description>
-                        {this.props.note.content}
+                        <Item.Header as='a'> Title: {this.props.note.title}</Item.Header>
+                        <Item.Meta>Date: {this.props.note.date}</Item.Meta>
+                        <Item.Description> Note:
+                         {this.props.note.content}
                         </Item.Description>
-                        <Item.Extra>Additional Details</Item.Extra>
-                        <Button content='Delete Note' onClick={this.handleDelete}/>
+                        <Button basic color='olive' content='Delete Note' style={{fontFamily: 'Tangerine, cursive'}} onClick={this.handleDelete}/>
                     </Item.Content>
                 </Item>
                 </Container>

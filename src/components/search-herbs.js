@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Image, Divider, Header} from 'semantic-ui-react';
+import { Button, Card, Image, Divider, Icon } from 'semantic-ui-react';
 
 class SearchHerbs extends React.Component{
     state = {herbToggle: false}
@@ -7,12 +7,11 @@ class SearchHerbs extends React.Component{
     render(){
         return(
             <div>
-            <Header as='h1' content='Herbs'/>
-            <Card>
+            <Card color='olive' style={{fontFamily: 'Poiret One, cursive'}}>
                 <Card.Content>
                     <Image src={this.props.image}/>
                     <Divider/>
-                    <Card.Header textAlign='center'>{this.props.name}</Card.Header>
+                    <Card.Header textAlign='center' style={{fontFamily: 'Poiret One, cursive'}}>{this.props.name}</Card.Header>
                     <Divider/>
                     <Card.Meta textAlign='center'>{this.props.aka}</Card.Meta>
                     <Card.Description>
@@ -22,7 +21,10 @@ class SearchHerbs extends React.Component{
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                    {this.state.herbToggle ? null : <Button basic color='green' onClick={this.handleAddHerb} content='Add To Collection'/>}
+                    {this.state.herbToggle ? null :  <Button compact animated='fade' basic color='olive' onClick={this.handleAddHerb}> 
+                                                    <Button.Content visible><Icon name='thumbtack'/></Button.Content>
+                                                    <Button.Content hidden style={{ fontFamily: 'Tangerine, cursive'}}>Add To Collection</Button.Content>
+                                                    </Button> }
                     </div>
                 </Card.Content>
             </Card>

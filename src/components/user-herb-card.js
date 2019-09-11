@@ -10,19 +10,23 @@ class UserHerbCard extends React.Component{
         const id = ls.get('id')
         const jwt = ls.get('jwt')
         const herb = this.props.herb
-        const herb_id = this.props.herb.id       
+        const herb_id = this.props.herb.id
         this.props.dispatch({type: 'DELETE_HERB', herb: herb})
-        deleteHerb(id, jwt, herb_id).then(alert('Herb Deleted'))
+        deleteHerb(id, jwt, herb_id).then(data => {
+            if(data) {
+                window.location.assign('/userprofile')
+            }
+        })
     }
 
     render(){
         return(
             <div>
-            <Card>
+            <Card style={{fontFamily: 'Poiret One, cursive'}} >
                 <Card.Content>
                     <Image src={this.props.herb.image}/>
                     <Divider/>
-                    <Card.Header textAlign='center'>{this.props.herb.name}</Card.Header>
+                    <Card.Header style={{fontFamily: 'Poiret One, cursive'}} textAlign='center'>{this.props.herb.name}</Card.Header>
                     <Divider/>
                     <Card.Meta textAlign='center'>{this.props.herb.aka}</Card.Meta>
                     <Card.Description>
@@ -33,10 +37,10 @@ class UserHerbCard extends React.Component{
                 <Card.Content extra>
                     <div className='ui two buttons'>
                     <Button.Group>
-                        <Button basic color='red' onClick={this.handleDelete}>Delete</Button>
+                        <Button basic color='black' style={{fontFamily: 'Tangerine, cursive'}} onClick={this.handleDelete}>Delete</Button>
                         <Button.Or />
                         <Link to='/create_note'>
-                            <Button basic color='green' positive onClick={() => this.props.dispatch({type: 'TRACK_HERB_NOTE', herb_id: this.props.herb.id})}>
+                            <Button  basic color='olive' style={{fontFamily: 'Tangerine, cursive'}} onClick={() => this.props.dispatch({type: 'TRACK_HERB_NOTE', herb_id: this.props.herb.id})}>
                                 Make A Note
                             </Button>
                         </Link>

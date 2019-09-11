@@ -15,34 +15,34 @@ class PlantCardDetails extends React.Component {
                     <Grid columns={2} divided>
                         <Grid.Row>  
                         <Grid.Column>
-                            <List floated='right'>
+                            <List floated='right' style={{fontFamily: 'Poiret One, cursive'}}>
                                 <List.Item >
-                                <List.Header>Common Name</List.Header>
+                                <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Common Name</List.Header>
                                 {this.props.oneplant.common_name ? this.props.oneplant.common_name : 'Unknown'}
                                 </List.Item>
 
                                 <List.Item>
-                                <List.Header>Family Name</List.Header>
+                                <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Family Name</List.Header>
                                 {this.props.oneplant.family ? this.props.oneplant.family.name : 'Unknown'}
                                 </List.Item>
 
                                 <List.Item>
-                                <List.Header>Family Common Name</List.Header>
+                                <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Family Common Name</List.Header>
                                 {this.props.oneplant.family_common_name ? this.props.oneplant.family_common_name : 'Unknown'}
                                 </List.Item>
 
                                 <List.Item>
-                                <List.Header>Genus</List.Header>
+                                <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Genus</List.Header>
                                 {this.props.oneplant.genus ? this.props.oneplant.genus.name : 'Unknown'}
                                 </List.Item>
 
                                 <List.Item>
-                                <List.Header>Duration</List.Header>
+                                <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Duration</List.Header>
                                 {this.props.oneplant.duration ? this.props.oneplant.duration : 'Unknown'}
                                 </List.Item>
 
                                 <List.Item>
-                                <List.Header>Division</List.Header>
+                                <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Division</List.Header>
                                 {this.props.oneplant.division ? this.props.oneplant.division.name : 'Unknown'}
                                 </List.Item>
                             </List>

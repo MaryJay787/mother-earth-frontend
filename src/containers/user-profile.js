@@ -62,23 +62,28 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div>
+                <Header as='h1' textAlign='left' style={{ fontFamily: 'Tangerine, cursive'}}> 
+                    <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                        Mother Earth 
+                    <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                </Header>
             <Segment style={{ marginTop: '1em',
                                  marginRight: '1em',
                                  marginLeft: '1em'
-                            }}>
-                <Header as='h1' content='User Profile' />
+                            }} color='olive'>
+                <Header as='h1' content='Profile' textAlign='center' style={{ fontFamily: 'Tangerine, cursive'}}/>
                 <Link to='/'>
-                    <Button color='black' compact floated='right' style={{ marginBottom: '1em' }} onClick={this.handleLogout}>
+                    <Button color='olive' compact floated='right' style={{ marginBottom: '1em', fontFamily: 'Tangerine, cursive' }} onClick={this.handleLogout}>
                     Logout
                     </Button>
                 </Link>
                 <Link to='/new_herb_or_remedy'>
-                    <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
+                    <Button color='olive' compact floated='right' style={{ marginBottom: '1em', fontFamily: 'Tangerine, cursive' }}>
                     New Herb/Remedy
                     </Button>
                 </Link>
                 <Link to='/herb_collection'>
-                    <Button color='black' compact floated='right' style={{ marginBottom: '1em' }}>
+                    <Button color='olive' compact floated='right' style={{ marginBottom: '1em', fontFamily: 'Tangerine, cursive' }}>
                     View Mother Earth
                     </Button>
                 </Link>
@@ -102,40 +107,40 @@ class UserProfile extends React.Component {
                                  marginRight: '1em',
                                  marginLeft: '1em'
                             }}>
-                    <List>
+                    <List style={{fontFamily: 'Poiret One, cursive'}}>
                         <List.Item>
-                        <List.Header>Name</List.Header>
+                        <List.Header style={{fontFamily: 'Poiret One, cursive'}} >Name</List.Header>
                         {this.props.user.name}
                         </List.Item>
                         <List.Item>
-                        <List.Header>Specialty</List.Header>
+                        <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Specialty</List.Header>
                         {this.props.user.specialty}
                         </List.Item>
                         <List.Item>
-                        <List.Header>Bio</List.Header>
+                        <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Bio</List.Header>
                         {this.props.user.bio}
                         </List.Item>
                         <List.Item>
-                        <List.Header>Username</List.Header>{this.props.user.username}
+                        <List.Header style={{fontFamily: 'Poiret One, cursive'}}>Username</List.Header>{this.props.user.username}
                         </List.Item>
                     </List>
                     <Link to='/editprofile'>
-                        <Button compact color='black' content='Edit Profile' style={{marginTop: '7em'}}/>
+                        <Button compact color='olive' content='Edit Profile' style={{marginTop: '7em', fontFamily: 'Tangerine, cursive'}}/>
                     </Link>
                     <Link to='/'>
-                        <Button compact color='black' content='Delete Account' onClick={this.handleDeleteAct}/>
+                        <Button compact color='olive' content='Delete Account' style={{fontFamily: 'Tangerine, cursive'}} onClick={this.handleDeleteAct}/>
                     </Link>
 
                     </Container>
                 </Grid.Column>
                 </Grid>
 
-                <Divider vertical>And</Divider>
+                <Divider vertical >And</Divider>
                 </Segment>
                 </Grid.Column>
 
                 <Grid.Column width={4}>
-                <Menu fluid vertical tabular='right'>
+                <Menu fluid vertical tabular='right' style={{fontFamily: 'Tangerine, cursive'}}>
                     <Menu.Item
                     name='profile'
                     active={this.props.active === 'profile'}
@@ -163,7 +168,7 @@ class UserProfile extends React.Component {
                                  marginRight: '1em',
                                  marginLeft: '1em'
                             }}>
-                    <Header as='h1' textAlign='center' content='My Earth'/>
+                    <Header as='h1' textAlign='center' content='My Earth' style={{fontFamily: 'Tangerine, cursive'}}/>
                     <Divider hidden/>
                     <Grid style={{ marginTop: '1em',
                                  marginRight: '1em',

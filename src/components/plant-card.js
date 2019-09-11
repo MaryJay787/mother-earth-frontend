@@ -23,7 +23,7 @@ class PlantCard extends React.Component{
                 <Segment style={{marginTop: '1em'}} color='olive'>
                    <Grid column={2}>
                    <Grid.Column floated='left' width={5}>
-                        <List>
+                        <List style={{fontFamily: 'Poiret One, cursive'}}>
                             <List.Item>Plant Name </List.Item>
                             <List.Item as='a' onClick={this.getPlant} > {this.props.scientific_name} <Icon name='hand point right' /></List.Item>
                         </List>

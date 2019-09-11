@@ -27,10 +27,10 @@ class HerbCard extends React.Component{
     render(){
         return(
             <div>
-            <Card color='olive'>
+            <Card color='olive' style={{fontFamily: 'Poiret One, cursive'}}>
                 <Card.Content>
                     <Image src={this.props.image}/>
-                    <Card.Header textAlign='center'>{this.props.name}</Card.Header>
+                    <Card.Header textAlign='center' style={{fontFamily: 'Poiret One, cursive'}}>{this.props.name}</Card.Header>
                     <Divider />
                     <Card.Meta textAlign='center'>{this.props.aka}</Card.Meta>
                     <Card.Description>
@@ -42,7 +42,7 @@ class HerbCard extends React.Component{
                     <div className='ui two buttons'>
                     {this.state.herbToggle ? null : <Button compact animated='fade' basic color='olive' onClick={this.handleAddHerb}> 
                                                     <Button.Content visible><Icon name='thumbtack'/></Button.Content>
-                                                    <Button.Content hidden>Add To Collection</Button.Content>
+                                                    <Button.Content hidden style={{ fontFamily: 'Tangerine, cursive'}}>Add To Collection</Button.Content>
                                                     </Button> }
                     </div>
                 </Card.Content>

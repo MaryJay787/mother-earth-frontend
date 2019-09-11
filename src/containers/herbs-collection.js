@@ -72,7 +72,7 @@ class Herbs extends React.Component{
         return(
             <div>
                 <Segment style={{marginTop: '1em', marginRight: '1em', marginLeft: '1em'}}>
-                    <Header as='h1' textAlign='center'>
+                    <Header as='h1' textAlign='center' style={{fontFamily: 'Tangerine, cursive'}}>
                         <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
                             Mother Earth 
                         <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
@@ -80,17 +80,17 @@ class Herbs extends React.Component{
                     <Grid >
                         <Divider vertical hidden/>
                         <Link to='/' >
-                            <Label attached='bottom right' color='blue' content='Logout' onClick={this.handleLogout}/>
+                            <Label attached='bottom right' color='olive' content='Logout' style={{fontFamily: 'Tangerine, cursive'}} onClick={this.handleLogout}/>
                         </Link>
                         <Link to='/userprofile' >
-                            <Label attached='bottom left' color='olive'>
+                            <Label attached='bottom left' color='olive' style={{fontFamily: 'Tangerine, cursive'}}>
                                 Back to Profile
                                 <Image avatar spaced='right' src='http://almalife.in/img/ayur.png' />
                             </Label>
                         </Link>
                     </Grid>
                 </Segment>
-                <Menu pointing style={{marginRight: '1em', marginLeft: '1em'}}>
+                <Menu pointing style={{marginRight: '1em', marginLeft: '1em', fontFamily: 'Tangerine, cursive'}}>
                     <Menu.Item
                         name='plants'
                         active={activeItem === 'plants'}

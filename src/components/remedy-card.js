@@ -26,10 +26,10 @@ class RemedyCard extends React.Component{
     render(){
         return(
             <div>
-            <Card color='olive'>
+            <Card color='olive' style={{fontFamily: 'Poiret One, cursive'}}>
                 <Card.Content>
                     <Image src={this.props.image}/>
-                    <Card.Header textAlign='center'>{this.props.ailment}</Card.Header>
+                    <Card.Header textAlign='center' style={{fontFamily: 'Poiret One, cursive'}}>{this.props.ailment}</Card.Header>
                     <Divider/>
                     <Card.Meta textAlign='center'>Remedy</Card.Meta>
                     <Card.Description>
@@ -40,7 +40,7 @@ class RemedyCard extends React.Component{
                     <div className='ui two buttons'>
                     {this.state.remToggle ? null : <Button compact animated='fade' basic color='olive' onClick={this.handleAddRem}> 
                                                     <Button.Content visible><Icon name='thumbtack'/></Button.Content>
-                                                    <Button.Content hidden>Add To Collection</Button.Content>
+                                                    <Button.Content hidden style={{ fontFamily: 'Tangerine, cursive'}}>Add To Collection</Button.Content>
                                                     </Button> }
                     </div>
                 </Card.Content>

@@ -12,17 +12,21 @@ class UserRemedyCard extends React.Component{
         const remedy = this.props.rem
         const rem_id = this.props.rem.id       
         this.props.dispatch({type: 'DELETE_REM', remedy: remedy})
-        deleteRemedy(id, jwt, rem_id).then(alert('Remedy Deleted'))
+        deleteRemedy(id, jwt, rem_id).then(data => {
+            if(data) {
+                window.location.assign('/userprofile')
+            }
+        })
     }
 
     render(){
         return(
             <div>
-            <Card>
+            <Card style={{fontFamily: 'Poiret One, cursive'}}>
                 <Card.Content>
                     <Image src={this.props.rem.image}/>
                     <Divider/>
-                    <Card.Header textAlign='center'>{this.props.rem.ailment}</Card.Header>
+                    <Card.Header style={{fontFamily: 'Poiret One, cursive'}}  textAlign='center'>{this.props.rem.ailment}</Card.Header>
                     <Divider/>
                     <Card.Meta textAlign='center'>Remedy</Card.Meta>
                     <Card.Description>
@@ -32,10 +36,10 @@ class UserRemedyCard extends React.Component{
                 <Card.Content extra>
                     <div className='ui two buttons'>
                     <Button.Group>
-                        <Button basic color='red' onClick={this.handleDelete}>Delete</Button>
+                        <Button basic color='black' style={{fontFamily: 'Tangerine, cursive'}} onClick={this.handleDelete}>Delete</Button>
                         <Button.Or />
                         <Link to='/create_note'>
-                            <Button basic color='green' positive onClick={() => this.props.dispatch({type: 'TRACK_REM_NOTE', rem_id: this.props.rem.id})}>
+                            <Button basic color='olive' style={{fontFamily: 'Tangerine, cursive'}} onClick={() => this.props.dispatch({type: 'TRACK_REM_NOTE', rem_id: this.props.rem.id})}>
                                 Make A Note
                             </Button>
                         </Link>
