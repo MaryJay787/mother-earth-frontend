@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Header, Segment, Card, Button, Divider, List } from 'semantic-ui-react';
+import { Header, Segment, Card, Button, Divider, List, Image, Label } from 'semantic-ui-react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import '../App.css';
 
@@ -14,7 +14,8 @@ class Health extends React.Component{
             health: '', food_groups: [],
             fg_clicked: false, 
             good_foods: [], bad_foods: [],
-            harmful: '', helpful: ''}
+            harmful: '', helpful: '',
+            closeFoods: false, food_group_clicked: false }
     
     onSelect = key => {
         this.setState({ selected: key });
@@ -54,11 +55,15 @@ class Health extends React.Component{
         fetch(`https://api.nutridigm.com/api/v1/nutridigm/detailedhelpfullist?subscriptionId=79c585f4-6c9b-4600-8772-db2103725cb2&problemId=${health_id}&fg1=${fg_id}`)
         .then(res => res.json())
         .then(data => this.setState({helpful: data}))
-        this.setState({ clicked: !this.state.clicked})
+        this.setState({ fg_clicked: !this.state.fg_clicked})
 
         fetch(`https://api.nutridigm.com/api/v1/nutridigm/detailedHarmfulList?subscriptionId=79c585f4-6c9b-4600-8772-db2103725cb2&problemId=${health_id}&fg1=${fg_id}`)
         .then(res => res.json())
         .then(data => this.setState({harmful: data}))        
+    }
+
+    closeFoodWindows = () => {
+        this.setState({closeFoods: true})
     }
 
     getTopGoodFoods = () => {
@@ -76,7 +81,7 @@ class Health extends React.Component{
     }
 
     getFoodGroups = () => {
-        this.setState({fg_clicked: !this.state.fg_clicked})
+        this.setState({food_group_clicked: !this.state.food_group_clicked})
         fetch(`https://api.nutridigm.com/api/v1/nutridigm/foodgroups?subscriptionId=79c585f4-6c9b-4600-8772-db2103725cb2`)
         .then(res => res.json())
         .then(data => this.setState({food_groups: data}))
@@ -164,10 +169,20 @@ class Health extends React.Component{
 
 
         return(
-            <div>               
-                <Link to='/health'><Header as='h1' content='Health Page' textAlign='center' /></Link>
+            <div>
+                 <Header as='h1' textAlign='left' style={{ fontFamily: 'Tangerine, cursive'}}> 
+                    <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                        Mother Earth 
+                    <Image src='https://www.nutramedix.com/media/wysiwyg/ingredients.png' />
+                </Header>               
+                <Link to='/userprofile'>
+                    <Label content='Back to Profile' attached='top right' color='olive' style={{fontFamily: 'Tangerine, cursive' }}/>
+                </Link>
+                <Header as='h1' content='Health Page' color='olive' style={{fontFamily: 'Tangerine, cursive' }} textAlign='center' />
                     <Divider/>
-                <Segment>
+                <Segment color='olive' style={{marginRight: '3em', marginLeft: '3em', fontFamily: 'Poiret One, cursive', fontSize: '20px'}}>
+                    <Label style={{fontFamily: 'Tangerine, cursive' }} attached='top left' basic color='olive' content='Select A Food Item'/>
+                    <Label style={{fontFamily: 'Tangerine, cursive' }} attached='bottom left' basic color='olive' content='Or A Food Group'/>
                 <ScrollMenu
                     data={menu}
                     arrowLeft={ArrowLeft}
@@ -175,18 +190,21 @@ class Health extends React.Component{
                     selected={selected}
                     onSelect={this.onSelect}
                     />
-                </Segment>
+                    <Divider/>
 
-                {this.state.fg_clicked ? null : (<ScrollMenu
+                    {this.state.food_group_clicked ? (<ScrollMenu
                     data={fg_menu}
                     arrowLeft={FGArrowLeft}
                     arrowRight={FGArrowRight}
                     selected={fg_select}
                     onSelect={this.onFGSelect}
-                />)}
-                <Button onClick={this.getFoodGroups}>See Food Groups</Button>
+                    />) : null}
+                </Segment>
+              
+                <Button compact color='olive' onClick={this.getFoodGroups} style={{fontFamily: 'Tangerine, cursive', marginLeft: '4.5em' }}>See Food Groups</Button>
 
-                <Segment>
+                <Segment color='olive' style={{marginRight: '3em', marginLeft: '3em', fontFamily: 'Poiret One, cursive', fontSize: '20px'}}>
+                <Label style={{fontFamily: 'Tangerine, cursive' }} attached='top left' basic color='olive' content='Select A Health Condition'/>
                 <ScrollMenu
                     data={health_menu}
                     arrowLeft={HealthArrowLeft}
@@ -195,15 +213,16 @@ class Health extends React.Component{
                     onSelect={this.onHealthSelect}
                     />
                 </Segment>
-                <Button content='Food Results' onClick={this.getResults}/>
-                {this.state.fg_clicked ? <Button content='Food Group Results' onClick={this.getFGResults}/> : null}
+                <Button color='olive' compact content='Food Results' onClick={this.getResults} style={{fontFamily: 'Tangerine, cursive'}}/>
+                <Button color='olive' compact content='Food Group Results' onClick={this.getFGResults} style={{fontFamily: 'Tangerine, cursive'}}/>
 
-                <Segment>
+                {this.state.closeFoods ? null : (<Segment style={{marginRight: '3em', marginLeft: '3em'}}>
                     {this.state.good_for.notes === undefined ? null : (
-                    <Card.Group>
-                    <Card>
+                    <Card.Group centered style={{fontFamily: 'Poiret One, cursive', fontSize: '15px'}}>
+                    <Card textAlign='center' color='olive'>
                         <Card.Content >
-                        <Header> <Card.Meta>Helpful or Harmful: </Card.Meta>
+                        <Header style={{fontFamily: 'Tangerine, cursive'}} textAlign='center'> 
+                        <Card.Meta>Helpful or Harmful: </Card.Meta>
                             {this.state.good_for['factor description'] ? this.state.good_for['factor description'] : 'No Data Available'}
                             </Header>
                         </Card.Content>
@@ -217,37 +236,56 @@ class Health extends React.Component{
                         <Button onClick={this.getTopBadFoods}>
                             See Top Foods To Avoid For Selected health condition
                         </Button>
+                        <Button content='Close Windows' onClick={this.closeFoodWindows}/>
                     </Card>
                     
-                    <Card>
-                        <Header content='Suggested Foods'/>
-                    <List>
-                        {this.state.good_foods}
-                    </List>
+                    <Card textAlign='center' color='olive'>
+                        <Card.Content>
+                            <Card.Header style={{fontFamily: 'Tangerine, cursive'}} textAlign='center'>
+                                <Card.Meta>Helpful Foods</Card.Meta>
+                                Suggested Foods
+                            </Card.Header>
+                            <Divider/>
+                            <List>
+                                {this.state.good_foods}
+                            </List>
+                        </Card.Content>
                     </Card>
 
-                    <Card>
-                    <Header content='Suggested Foods To Avoid'/>
-                    <List>
-                        {this.state.bad_foods}
-                    </List>
+                    <Card textAlign='center' color='olive'>
+                        <Card.Content>
+                            <Header style={{fontFamily: 'Tangerine, cursive'}} textAlign='center'>
+                                <Card.Meta>Harmful Foods </Card.Meta>
+                                Suggested Foods To Avoid
+                            </Header>
+                            <Divider/>
+                            <List>
+                                {this.state.bad_foods}
+                            </List>
+                        </Card.Content>
+                        
                     </Card>
                     </Card.Group>
                 )}
-                {this.state.clicked ? (
-                    <Card>
-                        <Header content='Food Group Results'/>
+                </Segment>
+                 )}
+                <Segment style={{marginRight: '3em', marginLeft: '3em'}}>  
+                {this.state.fg_clicked ? (
+                    <Card centered style={{fontFamily: 'Poiret One, cursive', fontSize: '15px'}} color='olive' textAlign='center'>
+                        <Card.Content>
+                        <Header content='Food Group Results' style={{fontFamily: 'Tangerine, cursive'}} textAlign='center'/>
+                        <Divider/>
                         <List>
-                            <List.Header content='Helpful Foods'/>
+                            <List.Header content='Helpful Foods: '/>
                             {this.state.helpful}
                         </List>
                         <List>
-                        <List.Header content='Harmful Foods'/>
+                        <List.Header content='Harmful Foods: '/>
                             {this.state.harmful}
                         </List>
+                        </Card.Content>
                     </Card>
                 ) : null }
-
                 </Segment>
             </div>
         )

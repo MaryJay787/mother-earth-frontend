@@ -87,6 +87,9 @@ class Herbs extends React.Component{
                                 Back to Profile
                                 <Image avatar spaced='right' src='http://almalife.in/img/ayur.png' />
                             </Label>
+                            <Link to='/health'>
+                                <Label attached='top left' color='olive' style={{fontFamily: 'Tangerine, cursive'}} content='Healthy Information'/>
+                            </Link>
                         </Link>
                     </Grid>
                 </Segment>
