@@ -53,6 +53,6 @@ class HerbCard extends React.Component{
     }
 }
 
-const mapStateToProps = state => ({userHerbs: state.herbs.userHerbs.usersherbs})
+const mapStateToProps = state => ({userHerbs: state.herbs.userHerbs})
 
 export default connect(mapStateToProps)(HerbCard);

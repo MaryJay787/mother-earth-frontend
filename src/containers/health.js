@@ -178,7 +178,7 @@ class Health extends React.Component{
                 <Link to='/userprofile'>
                     <Label content='Back to Profile' attached='top right' color='olive' style={{fontFamily: 'Tangerine, cursive' }}/>
                 </Link>
-                <Header as='h1' content='Health Page' color='olive' style={{fontFamily: 'Tangerine, cursive' }} textAlign='center' />
+                <Header as='h1' content='Healthy Information' color='olive' style={{fontFamily: 'Tangerine, cursive' }} textAlign='center' />
                     <Divider/>
                 <Segment color='olive' style={{marginRight: '3em', marginLeft: '3em', fontFamily: 'Poiret One, cursive', fontSize: '20px'}}>
                     <Label style={{fontFamily: 'Tangerine, cursive' }} attached='top left' basic color='olive' content='Select A Food Item'/>

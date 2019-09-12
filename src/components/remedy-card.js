@@ -50,6 +50,6 @@ class RemedyCard extends React.Component{
         )
     }
 }
-const mapStateToProps = state => ({userRemedies: state.herbs.userRemedies.userRemedies})
+const mapStateToProps = state => ({userRemedies: state.herbs.userRemedies})
 
 export default connect(mapStateToProps)(RemedyCard);

@@ -121,7 +121,7 @@ class Herbs extends React.Component{
                 <Link to='/health'>
                     <Label attached='top left' color='olive' style={{fontFamily: 'Tangerine, cursive'}} content='Healthy Information'/>
                 </Link>
-                <Grid style={{marginTop: '2em', marginLeft: '4em'}}>
+                <Grid style={{marginTop: '2em', marginLeft: '2em'}}>
                     {this.herbsSwitch()}
                     {this.state.searchHerbChange ? this.state.herbsSearched.map(herb => <SearchHerbs key={herb.id}{...herb}/>) : null}
                     {this.state.searchRemedyChange ? this.state.remediesSearched.map(remedy => <SearchRemedies key={remedy.id} {...remedy}/>) : null}
