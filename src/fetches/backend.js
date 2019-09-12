@@ -64,8 +64,8 @@ export function getUser(jwt) {
     }).then(res => res.json())
 };
 
-export function deleteRemedy(id, jwt, rem_id){
-    return fetch(`http://localhost:3000/remove_remedy/${id}/${rem_id}`, {
+export function deleteRemedy(id, jwt, rc_id){
+    return fetch(`http://localhost:3000/remove_remedy/${id}/${rc_id}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${jwt}`
@@ -73,8 +73,8 @@ export function deleteRemedy(id, jwt, rem_id){
     }).then(res => res.text())
 }
 
-export function deleteHerb(id, jwt, herb_id){
-    return fetch(`http://localhost:3000/remove_herb/${id}/${herb_id}`, {
+export function deleteHerb(id, jwt, hc_id){
+    return fetch(`http://localhost:3000/remove_herb/${id}/${hc_id}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${jwt}`

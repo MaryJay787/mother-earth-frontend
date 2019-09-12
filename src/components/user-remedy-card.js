@@ -10,9 +10,10 @@ class UserRemedyCard extends React.Component{
         const id = ls.get('id')
         const jwt = ls.get('jwt')
         const remedy = this.props.rem
-        const rem_id = this.props.rem.id       
+        const rem_id = this.props.rem.id     
+        const rc_id = this.props.rc.filter(rc => rc.remedy_id === rem_id)[0].id  
         this.props.dispatch({type: 'DELETE_REM', remedy: remedy})
-        deleteRemedy(id, jwt, rem_id).then(data => {
+        deleteRemedy(id, jwt, rc_id).then(data => {
             if(data) {
                 window.location.assign('/userprofile')
             }
@@ -52,5 +53,5 @@ class UserRemedyCard extends React.Component{
         )
     }
 }
-
-export default connect()(UserRemedyCard);
+const mapStateToProps = state => ({rc: state.herbs.user_rem_collections})
+export default connect(mapStateToProps)(UserRemedyCard);

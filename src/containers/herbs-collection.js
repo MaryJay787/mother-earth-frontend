@@ -87,9 +87,7 @@ class Herbs extends React.Component{
                                 Back to Profile
                                 <Image avatar spaced='right' src='http://almalife.in/img/ayur.png' />
                             </Label>
-                            <Link to='/health'>
-                                <Label attached='top left' color='olive' style={{fontFamily: 'Tangerine, cursive'}} content='Healthy Information'/>
-                            </Link>
+                            
                         </Link>
                     </Grid>
                 </Segment>
@@ -120,6 +118,9 @@ class Herbs extends React.Component{
                 </Menu>
                 
                 <Segment placeholder style={{marginRight: '1em', marginLeft: '1em'}}>
+                <Link to='/health'>
+                    <Label attached='top left' color='olive' style={{fontFamily: 'Tangerine, cursive'}} content='Healthy Information'/>
+                </Link>
                 <Grid style={{marginTop: '1em', marginLeft: '4em'}}>
                     {this.herbsSwitch()}
                     {this.state.searchHerbChange ? this.state.herbsSearched.map(herb => <SearchHerbs key={herb.id}{...herb}/>) : null}

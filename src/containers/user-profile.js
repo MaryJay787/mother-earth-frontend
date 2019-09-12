@@ -15,8 +15,8 @@ class UserProfile extends React.Component {
         const jwt = ls.get('jwt')
         const id = ls.get('id')
         getUser(jwt).then(data => this.props.dispatch({ type: 'SAVE_USER', user: data.user}))
-        getUserHerbs(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_HERBS', data}))
-        getUserRems(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_REMS', data}))
+        getUserHerbs(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_HERBS', data: data.usersherbs, user_herb_collects: data.userCollects}))
+        getUserRems(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_REMS', data: data.userRemedies, user_rem_collects: data.userRemsCollects}))
         getUserNotes(id, jwt).then(data => this.props.dispatch({type: 'GET_USER_NOTES', data: data.usernotes}))
     }
 
@@ -183,6 +183,6 @@ class UserProfile extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ notes: state.herbs.notes ,user: state.herbs.user, active: state.herbs.activeItem, userHerbs: state.herbs.userHerbs.usersherbs, userRems: state.herbs.userRemedies.userRemedies})
+const mapStateToProps = state => ({ notes: state.herbs.notes ,user: state.herbs.user, active: state.herbs.activeItem, userHerbs: state.herbs.userHerbs, userRems: state.herbs.userRemedies})
 
 export default connect(mapStateToProps)(UserProfile);

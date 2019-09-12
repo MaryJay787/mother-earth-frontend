@@ -11,7 +11,9 @@ const initialState = {
     clicked: false, 
     herb_id: null,
     rem_id: null,
-    one_herb: null
+    one_herb: null,
+    user_herb_collections: [],
+    user_rem_collections: []
   };
   
   export default (state = initialState, action) => {
@@ -41,10 +43,10 @@ const initialState = {
         return { ...state, clicked: true}
       }
       case 'GET_USER_HERBS': {
-        return { ...state, userHerbs: action.data}
+        return { ...state, userHerbs: action.data, user_herb_collections: action.user_herb_collects}
       }
       case 'GET_USER_REMS': {
-        return { ...state, userRemedies: action.data}
+        return { ...state, userRemedies: action.data, user_rem_collections: action.user_rem_collects}
       }
       case 'TRACK_HERB_NOTE': {
         return { ...state, herb_id: action.herb_id }
@@ -66,16 +68,16 @@ const initialState = {
         return { ...state, notes: state.notes}
       }
       case 'DELETE_REM': {
-        const index = state.userRemedies.userRemedies.indexOf(action.remedy)
+        const index = state.userRemedies.indexOf(action.remedy)
         if (index > -1) {
-          state.userRemedies.userRemedies.splice(index, 1);
+          state.userRemedies.splice(index, 1);
         }
         return { ...state }
       }
       case 'DELETE_HERB': {
-        const index = state.userHerbs.usersherbs.indexOf(action.herb)
+        const index = state.userHerbs.indexOf(action.herb)
         if (index > -1) {
-          state.userHerbs.usersherbs.splice(index, 1);
+          state.userHerbs.splice(index, 1);
         }
         return { ...state }
       }

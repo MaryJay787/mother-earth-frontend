@@ -11,8 +11,9 @@ class UserHerbCard extends React.Component{
         const jwt = ls.get('jwt')
         const herb = this.props.herb
         const herb_id = this.props.herb.id
+        const hc_id = this.props.hc.filter(hc => hc.herb_id === herb_id)[0].id
         this.props.dispatch({type: 'DELETE_HERB', herb: herb})
-        deleteHerb(id, jwt, herb_id).then(data => {
+        deleteHerb(id, jwt, herb_id, hc_id).then(data => {
             if(data) {
                 window.location.assign('/userprofile')
             }
@@ -53,5 +54,5 @@ class UserHerbCard extends React.Component{
         )
     }
 }
-
-export default connect()(UserHerbCard);
+const mapStateToProps = state => ({hc: state.herbs.user_herb_collections})
+export default connect(mapStateToProps)(UserHerbCard);
