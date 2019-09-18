@@ -172,7 +172,7 @@ class UserProfile extends React.Component {
                     <Divider hidden/>
                     <Grid style={{ marginTop: '1em',
                                  marginRight: '1em',
-                                 marginLeft: '4em'
+                                 marginLeft: '1em'
                             }}>
                     {this.clicked ? this.showUserCollection() : null }
                     </Grid>
